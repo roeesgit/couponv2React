@@ -1,0 +1,109 @@
+.Login{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: 0.5s move 0.2s 1 both;
+  }
+  .Login input{
+    caret-color: white ;
+  }
+   .Login .form {
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-left: 2em;
+      padding-right: 2em;
+      padding-bottom: 0.4em;
+      background-color: #171717;
+      border-radius: 25px;
+      /* transition: .4s ease-in-out; */
+      box-shadow: inset 4px 4px  5px rgba(255, 255, 255, 0.558),-30px 20px  15px rgba(0, 0, 0, 0.435);
+  
+    }
+    
+    .Login .form:hover {
+      /* transform: scale(1.05); */
+      border: 1px solid black;
+    }
+    
+    .Login #heading {
+      text-align: center;
+      margin-top: 1.3em;
+      color: rgb(255, 255, 255);
+      font-size: 1.2em;
+    }
+    
+    .Login .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      border-radius: 25px;
+      padding: 0.6em;
+      border: none;
+      outline: none;
+      color: white;
+      background-color: #171717;
+      box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    }
+    
+    .Login .input-icon {
+      height: 1.3em;
+      width: 1.3em;
+      fill: white;
+    }
+    
+    .Login .input-field {
+      background: none;
+      border: none;
+      outline: none;
+      width: 100%;
+      color: #d3d3d3;
+    }
+    
+    .Login .form .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin-top: 1.5em;
+    }
+    
+    .Login .button1:disabled {
+      background-color: none;
+      color: #171717;
+      border: groove 3px orange;
+      scale: 2;
+    }
+    .Login .button1 {
+      padding: 0.5em;
+      padding-left: 1.1em;
+      padding-right: 1.1em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: .4s ease-in-out;
+      background-color:transparent;
+      color: white;
+      box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.269);
+    }
+    
+    .Login .button1:hover {
+      background-color: rgba(0, 0, 0, 0.448);
+      color: white;
+      cursor: pointer;
+    }
+  
+    @keyframes move {
+      0%{
+        scale: 0;
+        /* transform: translate(400px,-200px); */
+      }
+      50%{
+        
+      }
+      100%{
+  
+      }
+    }

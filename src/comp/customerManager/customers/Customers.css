@@ -1,0 +1,31 @@
+
+.Customer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* height: 100%; */
+  }
+  
+  .Customer .CustomerForm {
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    align-items: center;
+  }
+  
+  .Customer .CustomerForm > h1 {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-weight: 500;
+    color: var(--textColor);
+    text-shadow: var(--shadow);
+  }
+  .Customer .CustomerForm input {
+    border-radius: 10px;
+  }
+  
+  .Customer > p {
+    padding: 1%;
+  }
+  
+  

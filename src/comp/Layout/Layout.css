@@ -1,0 +1,36 @@
+.Layout {
+  height: 100dvh;
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+}
+
+.Layout > header {
+  flex: 0 0 auto;
+  width: var(--container-width);
+  height: var(--container-height);
+  top: 6px;
+  left: 63;
+  z-index: 3;
+}
+.Layout > main {
+  flex: 1 0 auto;
+  width: 100%;
+  padding-top: calc(var(--container-height-top));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Layout > footer {
+  flex: 0 0 auto;
+  overflow: hidden;
+  height: 10vh;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

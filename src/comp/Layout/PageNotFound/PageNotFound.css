@@ -1,0 +1,16 @@
+.PageNotFound {
+    display: flex;
+    height: 100%;
+    align-items: center ;
+    justify-content: center;
+
+}
+
+.PageNotFound .imgContianer{
+    box-shadow: -43px 59px 33px  rgba(0, 0, 0, 0.641) ;
+    border-radius: 12%;
+}
+.PageNotFound .imgContianer img{
+    border-radius: 12%;
+
+}

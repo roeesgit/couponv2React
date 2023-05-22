@@ -1,0 +1,83 @@
+.CompanyView {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+  }
+  .CompanyView .contianer {
+    width: calc(var(--container-width) / 1.1);
+    height: calc(var(--container-admin-view-height));
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: var(--font1-sizeVW);
+    background-color:black;
+    overflow: hidden;
+    box-shadow: inset 0 0 calc(var(--header-shodw-base-blur)/3 )
+    calc(var(--shodw-base-size) ) rgb(247, 244, 244);
+  }
+  
+  .CompanyView .contianer button {
+    height: 70%;
+    width: 60%;
+    z-index: 2;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font1-sizeVW);
+    font-weight: 600;
+    color: aliceblue;
+    background-color:var(--color-gold-brown);
+    border: none;
+  }
+  .CompanyView .contianer .box1 {
+    position: relative;
+    width: 50%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .CompanyView .contianer .box {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: rgba(5, 5, 5, 0.344);
+  }
+  .CompanyView .contianer .box1::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 60%;
+    box-shadow:
+    0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-blue-neon),
+      inset 0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-blue-neon);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    filter: blur(var(--filter));
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .CompanyView .contianer .last-box {
+    width: 50%;
+  }
+  .CompanyView .showCase {
+    border-radius: 12px;
+    width: 90%;
+    margin-top: 20px;
+  }
+  
+  

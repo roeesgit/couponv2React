@@ -1,0 +1,24 @@
+.Coupons {
+    height: 100%;
+    width: 100%;
+
+
+}
+
+.Coupons .couponsShowCase {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+.Coupons .couponsShowCase .sortBy {
+    position: absolute;
+    top: var(--filter-heigth-position);
+}
+.Coupons .couponsShowCase .sortBy >h1{
+    color: var(--color-gold-brown);
+
+}
