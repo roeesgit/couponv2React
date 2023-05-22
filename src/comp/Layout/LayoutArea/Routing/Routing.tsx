@@ -11,6 +11,7 @@ import CompanyManipulate from "../../../companiesManager/company/CompanyManipula
 import CustomerManipulate from "../../../customerManager/customer/CustomerManipulate";
 import CompanyView from "../../../views/CompanyView";
 import CouponManipulate from "../../../couponsManager/CouponManipulate/CouponManipulate";
+import Logout from "../../../Auth/Login/Logout";
 
 export default function Routing(): JSX.Element {
   const navi = useNavigate();
@@ -47,6 +48,7 @@ const naviByRole = () => {
         <Route path="*" element={<PageNotFound />} />
         <Route path="/" element={<Navigate to="home" />} />
         <Route path="login" element={<Login />} />
+        <Route path="logout" element={<Logout />} />
 
         <Route path="admin" element={<AdminView />} />
         <Route path="admin/company" element={<CompanyManipulate />} />

@@ -4,8 +4,8 @@ import couponModel from "../../models/couponModel";
 import Coupons from "../couponsManager/Coupons/Coupons";
 import './Home.css'
 import App from "../Layout/Loading/App";
-interface Props{
-  comp:JSX.Element
+interface Props {
+  comp: JSX.Element
 }
 function Home(): JSX.Element {
   const [initialCoupons, setinitialCoupons] = useState<couponModel[]>([]);
@@ -16,28 +16,26 @@ function Home(): JSX.Element {
     couponServiceObj
       .getinitialCoupons()
       .then((res) => {
+        setIsLoading(false)
         setinitialCoupons(res);
-        setTimeout(()=>{
-          setIsLoading(false)
-          
-        },2000)
       })
       .catch((e) => {
         setIsLoading(false)
-          
-        alert("1 "+ e);
+
+        alert("2 " + e);
       });
-    return () => {};
+    return () => { };
   }, []);
 
   return (
     <div className="Home">
-      {isLoading? 
-    <App/>  
+      {isLoading ?
+        <App />
 
-    :
-    <Coupons coupons={initialCoupons} />
-    }
+        :
+        // <h1>fuck you 2</h1>
+        <Coupons coupons={initialCoupons} />
+      }
     </div>
   );
 }

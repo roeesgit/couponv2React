@@ -16,14 +16,18 @@ export enum CustomerActionType {
     AddCustomer,
     UpdateCustomer,
     DeleteCustomer,
+    ClearState
 
 }
 export interface CustomerAction{
     type:CustomerActionType
 
-    payload: any
+    payload?: any
 }
 
+export function clearCustomerStateAction( ):CustomerAction{
+    return {type: CustomerActionType.ClearState }
+}
 export function getFetchAction(customerList:customerModel[]):CustomerAction{
     return {type: CustomerActionType.FetchCustomers , payload:customerList}
 }
@@ -43,6 +47,11 @@ export function customerReducer (currentState:CustomerState = new CustomerState,
     const newState = {...currentState};
 
     switch(action.type){
+        case CustomerActionType.ClearState:
+
+        newState.customerList = [];
+        break;
+            
         case CustomerActionType.FetchCustomers:
             newState.customerList = action.payload;
             break;

@@ -57,6 +57,7 @@ export function AuthReducer(
   const newState: AuthState = { ...currentState };
 
   switch (action.type) {
+
     case AuthActionType.login:
       newState.token = action.payload;
       const user: resUserModel = jwt(newState.token!);

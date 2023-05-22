@@ -19,8 +19,6 @@ class AuthService {
     const user: resUserModel = jwt(token);
     const role:string = user.auth[0].authority; 
     authStore.dispatch(login(token));
-    console.log(1,role);
-    console.log(2,user);
     
     if(role==='ROLE_COMPANY'){
       companyServiceObj.getCompanyByEmail(user.username)
