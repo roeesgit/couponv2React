@@ -16,13 +16,17 @@ export enum CompanyActionType {
     AddCompany,
     UpdateCompany,
     DeleteCompany,
+    ClearState
 
 }
 export interface CompanyAction{
     type:CompanyActionType
-    payload: any
+    payload?: any
 }
 
+export function clearCompanyStateAction( ):CompanyAction{
+    return {type: CompanyActionType.ClearState }
+}
 export function getAllAction(companyList:companyModel[]):CompanyAction{
     return {type: CompanyActionType.FetchCompany , payload:companyList}
 }
@@ -42,6 +46,11 @@ export function companyReducer (currentState:CompanyState = new CompanyState, ac
     const newState = {...currentState};
 
     switch(action.type){
+        case CompanyActionType.ClearState:
+        newState.companyList =[];
+
+        break;
+            
         case CompanyActionType.FetchCompany:
             newState.companyList = action.payload;
             break;

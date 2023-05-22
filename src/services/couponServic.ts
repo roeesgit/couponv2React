@@ -15,6 +15,7 @@ class couponService {
 
 
   async updatecoupon(coupon: couponModel, couponId: number) {
+    
     await axios.post<couponModel>(appConfig.coupons + "/" + couponId, coupon,
       { headers: { Authorization: "Bearer " + authStore.getState().token } })
     couponStore.dispatch(addCoupon(coupon));
@@ -36,8 +37,13 @@ class couponService {
 
 
   async getinitialCoupons(): Promise<couponModel[]> {
-    return await this.getAxiosCoupons(
-      appConfig.coupons + "/all" )
+    if (couponStore.getState().couponList.length === 0) {
+      const res = await axios.get<couponModel[]>(appConfig.coupons+"/all")
+
+      couponStore.dispatch(getCoupons(res.data));
+    }
+    return couponStore.getState().couponList;
+
   }
   async getCompanyCoupons(): Promise<couponModel[]> {
     return await this.getAxiosCoupons(

@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { authStore, logMeOut } from "../../../../states/AuthState";
 import resUserModel from "../../../../models/resUserModel";
 export default function Header(): JSX.Element {
+  
   const navi = useNavigate();
-
   const userName = useRef("");
 
   useEffect(() => {
@@ -17,10 +17,15 @@ export default function Header(): JSX.Element {
 
     return () => unsubscribe();
   }, []);
+  
+  
   function logout(): void {
-    authStore.dispatch(logMeOut());
-    navi("/home");
+    // authStore.dispatch(logMeOut());
+    // navi("/home");
+    navi("/logout");
   }
+ 
+ 
   return (
     <div className="Header">
       <div className="headerContainer">
@@ -31,7 +36,7 @@ export default function Header(): JSX.Element {
 
         {/* GREERING */}
         <div className="greeting">
-          {userName.current.length>0 ? (
+          {authStore.getState().user? (
             // TRUE
             <div className="greetingBox">
               <p className="hello">Hello- {userName.current}</p>
