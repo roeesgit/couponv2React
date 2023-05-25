@@ -104,7 +104,7 @@ export default function CouponManipulate(): JSX.Element {
         setIsLoading(true);
         couponServiceObj.updatecoupon(coupon, couponId).then(() => {
             setIsLoading(false);
-            navi("company");
+            navi("/company");
 // .. לחזור לקופונים  
       }).catch(e => {
             setIsLoading(false);

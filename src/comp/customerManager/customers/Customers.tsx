@@ -47,7 +47,7 @@ export default function Customers(): JSX.Element {
 
   
   const handleEdit = (customer: customerModel) => {
-    navi("customer/"+customer.id)
+    navi("/admin/customer/"+customer.id)
     // setSelectedCustomer(customer);
   };
   

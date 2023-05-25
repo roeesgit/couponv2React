@@ -27,14 +27,9 @@ class resUserModel{
 //     const id = container.user.id;
 //     const username = container.user.username;
 //     const authorities : string[] = container.user.auth.map(({authority: string}) => auth);
-//     const iat = container.user.iat;
 //     const exp = container.user.exp;
-//     return new resUserModel(id, username, authorities,iat,exp);
+//     return new resUserModel(id, username, authorities,exp);
    
-  
-  
-  
-  
 // }
 
 

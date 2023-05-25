@@ -19,7 +19,7 @@ export default function CompanyManipulate(): JSX.Element {
   const params = useParams();
   const companyId: number = +params.companyId!;
   const isUpdate = companyId ? true : false;
-
+ 
   let companyFromDB: companyModel;
   const companyManipulated = useRef<companyModel>(
     companyId ? companyStore.getState().companyList.filter(c => c.id === companyId)[0] : companyFromDB!);
@@ -89,24 +89,25 @@ export default function CompanyManipulate(): JSX.Element {
       .addCompany(company)
       .then(() => {
         setIsLoading(false);
-        navi("/admin");
+        navi("/admin/1");
       })
       .catch((e) => {
 
         setIsLoading(false);
         let errorMessage: ErrorMessage = e.response.data;
-        alert(errorMessage.message);
+        alert( "addCompany: "+errorMessage.message);
       });
   };
 
-  const updateCompany = async (company: companyModel) => {
+  const updateCompany = async (company: userModel) => {
     setIsLoading(true);
     companyServiceObj.updateCompany(company, companyId).then(() => {
       setIsLoading(false);
-      navi("/admin");
+      navi("/admin/1");
     }).catch(e => {
-      console.log(e);
       setIsLoading(false);
+      const er: ErrorMessage = e.response.data; 
+      alert("updateCompany: "+ er.message);
     })
   };
 
@@ -114,7 +115,7 @@ export default function CompanyManipulate(): JSX.Element {
     reset();
   }
 
-  function sendCompany(company: companyModel): void {
+  function sendCompany(company: userModel): void {
     companyId ? updateCompany(company) : addCompany(company);
   }
 

@@ -9,6 +9,7 @@ import {
 } from "../states/CustomerState";
 import { authStore } from "../states/AuthState";
 import customerModel from "../models/customerModel";
+import regCustomerModel from "../models/regCustomerModel";
 
 class CustomerService {
 async  getCustomerByEmail(email: string) : Promise<customerModel>{
@@ -44,12 +45,14 @@ return res.data;
       payload: response.data,
     });
   }
-  async updateCustomer(customer: customerModel, customerId:number): Promise<void> {
+  async updateCustomer(customer: regCustomerModel, customerId:number): Promise<void> {
     const response = await axios.put<customerModel>(
       appConfig.customers+"/"+customerId,
       customer, 
       { headers: { "Authorization": "Bearer " + authStore.getState().token } }
     );
+    customer.password="";
+    customer.confirmPassword = "";
     customerStore.dispatch(getUpdateAction(response.data,customerId));
   }
   async deleteCustomerById(customerId: number): Promise<void> {
@@ -75,6 +78,13 @@ return res.data;
       console.log("customers from state");
     }
     return customerStore.getState().customerList;
+  }
+
+
+
+  getCustomerFromState(customerId : number):customerModel{
+    const indexToFind = customerStore.getState().customerList.findIndex(c=>c.id===customerId)
+    return customerStore.getState().customerList[indexToFind];
   }
 }
 

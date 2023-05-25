@@ -4,17 +4,18 @@ import loginUserModel from "../../../models/loginUserModel";
 import authService from "../../../services/AuthService";
 import * as yup from "yup";
 import "./Login.css";
-import { authStore } from "../../../states/AuthState";
+import { authStore, logOut } from "../../../states/AuthState";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import App from "../../Layout/Loading/App";
 import { MdAlternateEmail } from 'react-icons/md';
 import { AiFillUnlock } from 'react-icons/ai';
+import resUserModel from "../../../models/resUserModel";
 
 
 export function Login(): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
-
+  const navi = useNavigate();
 
   const schema = yup.object().shape({
     username: yup.string().required("Username is required")
@@ -27,6 +28,8 @@ export function Login(): JSX.Element {
       .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?!.*\s).{8,}$/,
         "Password must contain at least one digit,\none lowercase letter, one uppercase letter, one special character, must not contain spaces, and must be at least 8 characters long")
   });
+
+
   const { handleSubmit, register, formState: { errors } } =
     useForm<loginUserModel>({
       mode: "all",
@@ -34,7 +37,7 @@ export function Login(): JSX.Element {
     });
 
   const passwordErrorMessage =
-    <div>
+    <div className="passwordErrorMessage">
       <p> Password must contain at least one digit</p>
       <p> one lowercase letter, one uppercase letter</p>
       <p> one special character, must not contain spaces</p>
@@ -42,32 +45,46 @@ export function Login(): JSX.Element {
     </div>;
 
 
-
-
-
-   function login(loginModel: loginUserModel) {
+  function login(loginModel: loginUserModel) {
+    console.log(1);
+    
     setIsLoading(true);
     authService
-    .login(loginModel)
-    .then(() => {
+      .login(loginModel)
+      .then(() => {
         setIsLoading(false);
+        loginTimeOut();
       })
       .catch((e) => {
         setIsLoading(false);
-       alert("Incorrect login details");
+        alert("Incorrect login details");
       });
   }
 
+
+  function loginTimeOut() {
+    const user: resUserModel = authStore.getState().user!;
+    const expiredMillis: number =
+      new Date(user.exp * 1000).getTime() - new Date().getTime();
+
+
+    setTimeout(() => {
+      authStore.dispatch(logOut())
+      navi("/logout")
+    }, expiredMillis);
+  }
+
+
   return (
     <div className="Login">
-      {isLoading ? 
+      {isLoading ?
         <App />
-       : 
+        :
         <>
           <form className="form" onSubmit={handleSubmit(login)}>
             <p id="heading">Login</p>
             <div className="field">
-              <MdAlternateEmail/>
+              <MdAlternateEmail />
               <input
                 autoComplete="off"
                 placeholder="Username"
@@ -82,7 +99,7 @@ export function Login(): JSX.Element {
               </span>
             )}
             <div className="field">
-              <AiFillUnlock/>
+              <AiFillUnlock />
               <input
                 placeholder="Password"
                 className="input-field"

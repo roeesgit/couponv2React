@@ -23,7 +23,7 @@ export interface couponAction {
     payload?: any
 }
 
-export function clearCouponStateAction(): couponAction {
+export function clearCouponsStateAction(): couponAction {
     return { type: couponActionType.ClearState }
 }
 export function getCategoriesAction(categoryList: categoryModel[]): couponAction {
@@ -51,27 +51,23 @@ export function couponReducer(currentState: couponState = new couponState, actio
     switch (action.type) {
 
         case couponActionType.ClearState:
-
             newState.couponList = [];
             newState.categoryList = [];
-
-
             break;
-        case couponActionType.GetCategories:
 
+        case couponActionType.GetCategories:
             newState.categoryList = action.payload;
             break;
+
         case couponActionType.GetCoupons:
             newState.couponList = action.payload
             newState.couponList.map(c => {
                 c.endDate = new Date(c.endDate);
-                c.startDate = new Date(c.startDate);
-            })
+                c.startDate = new Date(c.startDate); })
             break;
 
         case couponActionType.AddCoupon:
             newState.couponList.push(action.payload)
-
             break;
 
         case couponActionType.UpdateCoupon:

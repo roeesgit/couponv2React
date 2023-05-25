@@ -6,12 +6,14 @@ import Home from "../../../Home/Home";
 import PageNotFound from "../../PageNotFound/PageNotFound";
 import AdminView from "../../../views/AdminView";
 import { useEffect } from "react";
-import { authStore, logMeOut } from "../../../../states/AuthState";
+import { authStore } from "../../../../states/AuthState";
 import CompanyManipulate from "../../../companiesManager/company/CompanyManipulate";
 import CustomerManipulate from "../../../customerManager/customer/CustomerManipulate";
 import CompanyView from "../../../views/CompanyView";
 import CouponManipulate from "../../../couponsManager/CouponManipulate/CouponManipulate";
 import Logout from "../../../Auth/Login/Logout";
+import CompanyCard from "../../../companiesManager/companyCard/CompanyCard";
+import CustomerCard from "../../../customerManager/customerCard/CustomerCard";
 
 export default function Routing(): JSX.Element {
   const navi = useNavigate();
@@ -28,17 +30,17 @@ const naviByRole = () => {
   if (role) {
     switch (role) {
       case "ROLE_ADMIN":
-        navi("admin");
+        navi("/admin");
         break;
       case "ROLE_COMPANY":
-        navi("company");
+        navi("/company");
         break;
       case "ROLE_CUSTOMER":
-        navi("customer");
+        navi("/customer");
         break;
     }
   } else {   
-    navi("login");
+    navi("/login");
   }
 }
   return (
@@ -50,14 +52,15 @@ const naviByRole = () => {
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
 
-        <Route path="admin" element={<AdminView />} />
-        <Route path="admin/company" element={<CompanyManipulate />} />
-        <Route path="admin/company/:companyId?" element={<CompanyManipulate />} />
+        <Route path="admin/:renderId?" element={<AdminView />} />
+        {/* <Route path="admin/company/:companyId?" element={<CompanyManipulate />} /> */}
+        <Route path="admin/company/companyDetails/:companyId?" element={<CompanyManipulate />} />
         <Route path="admin/customer" element={<CustomerManipulate />} />
         <Route path="admin/customer/:customerId?" element={<CustomerManipulate />}/>
+        <Route path="admin/customer/customerDetails/:customerId?" element={<CustomerCard />}/>
         
         <Route path="company" element={<CompanyView />} />
-        <Route path="company/coupon" element={<CouponManipulate />} />
+        <Route path="company/coupon/:couponId?" element={<CouponManipulate />} />
 
         {/* <Route path="customer" element={<AdminView />} /> */}
       </Routes>

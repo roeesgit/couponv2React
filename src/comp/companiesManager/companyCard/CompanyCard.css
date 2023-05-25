@@ -1,4 +1,15 @@
 .CompanyCard{
-    width: calc(100%/4);
+    width: 70%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    border: groove 3px orange;
 
+}
+
+.CompanyCard .goBackHolder{
+
+    border: groove 3px orange;
 }

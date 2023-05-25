@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function CompanyView():JSX.Element{
 const navi = useNavigate();
     const handleAddClick = () => {
-      navi("coupon");
+      navi("/company/coupon");
        };
     
 

@@ -11,14 +11,13 @@ export default function Companies(): JSX.Element {
   const [companies, setCompanies] = useState<companyModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const navi = useNavigate();
-  const [selectedCompany, setSelectedCompany] = useState<companyModel>();
   
   useEffect(() => {
     getCompanies();
-  }, [selectedCompany]);
+  }, []);
   
   const getCompanies = () => {
-    
+  
     setIsLoading(true);
     companyServiceObj.getAll().then((res)=>{
       setIsLoading(false);
@@ -32,9 +31,10 @@ export default function Companies(): JSX.Element {
     })
   };
   
-  const handleEdit = (company: companyModel) => {
-    navi("company/"+company.id)
-    setSelectedCompany(company);
+  const handlecompanyDetails = (company: companyModel) => {
+    console.log(1);
+    
+    navi("/admin/company/companyDetails/"+company.id)
   };
   
   const deleteCompany = async (companyId: number) => {
@@ -47,7 +47,7 @@ export default function Companies(): JSX.Element {
       setIsLoading(false);
     } catch (e) {
       setIsLoading(false);
-      alert(e);
+      alert("deleteCompany: "+ e);
     }
   };
   
@@ -55,10 +55,7 @@ export default function Companies(): JSX.Element {
     const userResponse = window.confirm("Are you sure?");
     if (userResponse) {
       await deleteCompany(company.id);
-    } else {
-      // User clicked Cancel
-    }
-    setSelectedCompany(company);
+    } 
   };
   
   function filterByName(e: ChangeEvent<HTMLInputElement>) {
@@ -106,7 +103,7 @@ export default function Companies(): JSX.Element {
               <ul key={company.id}>
                 <li>
                   <button
-                    onClick={() => handleEdit(company)}
+                    onClick={() => handlecompanyDetails(company)}
                     className="userCardBtu"
                     >
                     <div className="oLdetails">

@@ -21,9 +21,7 @@ export default function CustomerManipulate(): JSX.Element {
     const params = useParams();
     const customerId: number = +params.customerId!;
 
-    let customerFromDB: regCustomerModel;
-    const customerManipulated = useRef<customerModel>(
-        customerId ? customerStore.getState().customerList.filter(c => c.id === customerId)[0] : customerFromDB!);
+    const customerManipulated = useRef<customerModel>(customerServiceObj.getCustomerFromState(customerId));
 
 
     const schema = yup.object().shape({
@@ -89,7 +87,7 @@ export default function CustomerManipulate(): JSX.Element {
             .addCustomer(customer)
             .then(() => {
                 setIsLoading(false);
-                navi("/admin");
+                navi("/admin/2");
             })
             .catch((e) => {
                 setIsLoading(false);
@@ -99,16 +97,14 @@ export default function CustomerManipulate(): JSX.Element {
     };
 
     const updateCustomer = async (customer: regCustomerModel) => {
-        console.log("customerId: ", customerId);
-
         setIsLoading(true);
         customerServiceObj.updateCustomer(customer, customerId).then(() => {
             setIsLoading(false);
-            navi("/admin");
+            navi("/admin/2");
         }).catch(e => {
             setIsLoading(false);
-            let errorMessage: ErrorMessage = e.response.data;
-            alert(errorMessage.message);
+            const er: ErrorMessage = e.response.data;
+            alert(er.message);
         })
     };
 

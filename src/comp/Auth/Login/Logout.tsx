@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import './Logout.css'
 import { clearCustomerStateAction, customerStore } from '../../../states/CustomerState'
-import {clearCouponStateAction, couponStore } from '../../../states/CouponState'
+import {clearCouponsStateAction, couponStore } from '../../../states/CouponState'
 import {clearCompanyStateAction, companyStore } from '../../../states/CompanyState'
-import { authStore, logMeOut } from '../../../states/AuthState'
+import { authStore, logOut } from '../../../states/AuthState'
 import { useNavigate } from 'react-router-dom'
+import authService from '../../../services/AuthService'
+import authServiceObj from '../../../services/AuthService'
 
 export default function Logout() :JSX.Element{
     const navi = useNavigate();
@@ -12,19 +14,16 @@ export default function Logout() :JSX.Element{
 
     useEffect(()=>{
 
-        customerStore.dispatch(clearCustomerStateAction())
-        couponStore.dispatch(clearCouponStateAction())
-        companyStore.dispatch(clearCompanyStateAction())
-        authStore.dispatch(logMeOut())
-        navi("/home")
+        customerStore.dispatch(clearCustomerStateAction());
+        couponStore.dispatch(clearCouponsStateAction());
+        companyStore.dispatch(clearCompanyStateAction());
+        authServiceObj.logout();
+        navi("/home");
 
     },[])
 
     return(
 
-        <div className="Logout">
-
-
-        </div>
+        <div className="Logout"></div>
     )
 }

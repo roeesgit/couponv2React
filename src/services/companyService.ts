@@ -9,13 +9,14 @@ import {
 } from "../states/CompanyState";
 import { authStore } from "../states/AuthState";
 import companyModel from "../models/companyModel";
+import userModel from "../models/userModel";
 
 class CompanyService {
 async  getCompanyByEmail(email: string): Promise<companyModel> {
 
-   const res = await axios.get<companyModel>(appConfig.companies+"/"+email,
-    { headers: { "Authorization": "Bearer " + authStore.getState().token } }
-    )
+const res = await axios.get<companyModel>(appConfig.companies+"/company_name/"+email,
+{ headers: { "Authorization": "Bearer " + authStore.getState().token } }
+)
 return res.data;
 }
   async deleteCompanyById(companyId: number): Promise<void> {
@@ -29,12 +30,14 @@ return res.data;
     });
 
   }
-  async updateCompany(company: companyModel, companyId: number): Promise<void> {
+  async updateCompany(company: userModel, companyId: number): Promise<void> {
 
     await axios.put<companyModel>(
       appConfig.companies + "/" + companyId, company,
       { headers: { "Authorization": "Bearer " + authStore.getState().token } }
     )
+    company.confirmPassword = "";
+    company.password = "";
     companyStore.dispatch(UpdateAction(company));
   }
 
@@ -72,6 +75,13 @@ return res.data;
 
 
     return companyStore.getState().companyList;
+  }
+
+
+
+  getCompanyFromState(companyId : number):companyModel{
+    const indexToFind = companyStore.getState().companyList.findIndex(c=>c.id===companyId)
+    return companyStore.getState().companyList[indexToFind];
   }
 }
 

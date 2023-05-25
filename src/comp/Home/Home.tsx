@@ -33,7 +33,6 @@ function Home(): JSX.Element {
         <App />
 
         :
-        // <h1>fuck you 2</h1>
         <Coupons coupons={initialCoupons} />
       }
     </div>

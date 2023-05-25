@@ -10,17 +10,14 @@ interface autority {
 export class AuthState {
   user: resUserModel | null = null;
   token: string | null = null;
-  name: string = "";
-  customerUser: customerModel | null = null
+  loggedUserName: string | null = "";
   constructor() {
 
     const token: string | null = localStorage.getItem("token");
     if (token) {
       if (tokeExp(token)) {
-
-        const user: resUserModel = jwt(token);
         this.token = token;
-        this.user = user;
+        this.user = jwt(token);
       }
       else {
         localStorage.clear();
@@ -31,7 +28,7 @@ export class AuthState {
 export enum AuthActionType {
   login,
   logout,
-  setUserName,
+  
 }
 
 export interface Action {
@@ -39,14 +36,11 @@ export interface Action {
   payload: any;
 }
 
-export function login(token: string): Action {
-  return { type: AuthActionType.login, payload: token };
+export function login(token: string ,username : string): Action {
+  return { type: AuthActionType.login, payload: {token , username} };
 }
-export function logMeOut(): Action {
+export function logOut(): Action {
   return { type: AuthActionType.logout, payload: null };
-}
-export function setUserName(name: string): Action {
-  return { type: AuthActionType.setUserName, payload: name };
 }
 
 
@@ -59,29 +53,17 @@ export function AuthReducer(
   switch (action.type) {
 
     case AuthActionType.login:
-      newState.token = action.payload;
-      const user: resUserModel = jwt(newState.token!);
-      newState.user = user;
-
-      localStorage.setItem("token", newState.token!);
-
-      const expiredMillis: number =
-        new Date(user.exp * 1000).getTime() - new Date().getTime();
-
-
-      setTimeout(() => {
-        authStore.dispatch(logMeOut())
-      }, expiredMillis);
-      break;
-
-    case AuthActionType.setUserName:
-      newState.name = action.payload;
+      newState.token = action.payload.token;
+      newState.user = jwt(action.payload.token);
+      localStorage.setItem("token", action.payload.token);
+      newState.loggedUserName = action.payload.username;
       break;
 
 
     case AuthActionType.logout:
       newState.token = null;
       newState.user = null;
+      newState.loggedUserName = null;
       localStorage.clear();
       break;
 
@@ -92,7 +74,8 @@ export function AuthReducer(
 
 const tokeExp = (token: string): boolean => {
   const expHolder: { exp: number } = jwt(token);
-  const expiredMillis: number = new Date(expHolder.exp * 1000).getTime() - new Date().getTime();
+  const expiredMillis: number = 
+  new Date(expHolder.exp * 1000).getTime() - new Date().getTime();
   return expiredMillis > 0
 }
 
