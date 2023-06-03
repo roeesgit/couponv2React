@@ -1,10 +1,10 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./comp/Layout/Loading/App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "./comp/Layout/Layout";
+import { ToastContainer } from "react-toastify";
+import ScrollToTop from "react-scroll-to-top";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,9 +12,17 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-   {/* <App /> */}
   <BrowserRouter>
+  <ToastContainer />
     <Layout />
+  <ScrollToTop smooth
+  className="scrollUp"
+  style={{
+    borderRadius: '100%',
+    background: 'var(--color-gold-neon)',
+    boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.54)',
+    color: 'blue'
+  }}/>
   </BrowserRouter>
    </>
 );

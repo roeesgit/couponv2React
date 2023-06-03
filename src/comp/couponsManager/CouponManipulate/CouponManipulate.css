@@ -69,13 +69,13 @@ height: 100%;
     padding-left: calc(var(--customPadding)/2);
 }
 
-.CouponManipulate .couponForm  .btu{
+.CouponManipulate .couponForm  .button{
     display: flex; 
     height: 20%;
     width: 100%;
     justify-content: space-around;
 }
-.CouponManipulate .couponForm  .btu button{
+.CouponManipulate .couponForm  .button button{
     width: 20%;
     height: 100%;
     padding: 5px;

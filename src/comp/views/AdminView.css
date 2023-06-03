@@ -56,8 +56,8 @@
   height: 100%;
   width: 60%;
   box-shadow:
-  0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-blue-neon),
-    inset 0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-blue-neon);
+  0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-gold-neon),
+    inset 0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-gold-neon);
   border-radius: 50%;
   animation: spin 1s infinite linear;
   filter: blur(var(--filter));
@@ -75,6 +75,7 @@
   width: 50%;
 }
 .AdminView .showCase {
+  
   border-radius: 12px;
   width: 90%;
   margin-top: 20px;

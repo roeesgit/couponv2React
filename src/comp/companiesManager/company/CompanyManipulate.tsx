@@ -2,27 +2,28 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import "./CompanyManipulate.css";
 import companyServiceObj from "../../../services/companyService";
-import userModel from "../../../models/userModel";
-import { useEffect, useRef, useState } from "react";
-import App from "../../Layout/Loading/App";
+import { useRef, useState } from "react";
 import companyModel from "../../../models/companyModel";
 import * as yup from "yup";
 import { companyStore } from "../../../states/CompanyState";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorMessage } from "../../../models/ErrorMessageModel";
-
+import regCompanyModel from "../../../models/regCompanyModel";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../Loader/Loader";
 
 export default function CompanyManipulate(): JSX.Element {
+
   const navi = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const params = useParams();
   const companyId: number = +params.companyId!;
   const isUpdate = companyId ? true : false;
- 
-  let companyFromDB: companyModel;
+
   const companyManipulated = useRef<companyModel>(
-    companyId ? companyStore.getState().companyList.filter(c => c.id === companyId)[0] : companyFromDB!);
+    companyStore.getState().companyList.filter(c => c.id === companyId)[0]);
 
 
 
@@ -34,7 +35,8 @@ export default function CompanyManipulate(): JSX.Element {
       .max(15, "This field must be less than 15 characters long")
       .test("unique-name", "Name must be unique", function (value) {
         return !validUniqueField(value, true);
-      }),
+      })
+      ,
     email: yup.string()
       .required("Email is required")
       .matches(/.+@+.+\..+/, "Please provide a valid email address")
@@ -48,11 +50,11 @@ export default function CompanyManipulate(): JSX.Element {
       .max(20, "This field must be less than 20 characters long")
       .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?!.*\s).{8,}$/,
         "Password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, must not contain spaces, and must be at least 8 characters long")
-        ,confirmPassword: yup.string()
-        .required("confirmation of password is important")
-        .oneOf([yup.ref("password"),""], "password doesn't match"),
-  
-      });
+    , confirmPassword: yup.string()
+      .required("confirmation of password is important")
+      .oneOf([yup.ref("password"), ""], "password doesn't match"),
+
+  });
 
   const passwordErrorMessage =
     <div>
@@ -68,7 +70,7 @@ export default function CompanyManipulate(): JSX.Element {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<userModel>({
+  } = useForm<regCompanyModel>({
     defaultValues: companyManipulated.current,
     mode: "all",
     resolver: yupResolver(schema),
@@ -82,32 +84,34 @@ export default function CompanyManipulate(): JSX.Element {
   };
 
 
-  const addCompany = async (company: companyModel) => {
+  const addCompany = async (company: regCompanyModel) => {
     setIsLoading(true);
 
     companyServiceObj
       .addCompany(company)
       .then(() => {
+        toast.success(company.name +' is now a new partner!');
+
         setIsLoading(false);
         navi("/admin/1");
       })
       .catch((e) => {
-
         setIsLoading(false);
-        let errorMessage: ErrorMessage = e.response.data;
-        alert( "addCompany: "+errorMessage.message);
+        const errorMessage: ErrorMessage = e.response.data;
+        toast.error('Add company: ' + errorMessage.message);
       });
   };
 
-  const updateCompany = async (company: userModel) => {
+  const updateCompany = async (company: regCompanyModel) => {
     setIsLoading(true);
     companyServiceObj.updateCompany(company, companyId).then(() => {
+      toast.success(company.name + " Updated")
       setIsLoading(false);
-      navi("/admin/1");
+      navi("/admin/company/" + companyId);
     }).catch(e => {
       setIsLoading(false);
-      const er: ErrorMessage = e.response.data; 
-      alert("updateCompany: "+ er.message);
+      const er: ErrorMessage = e.response.data;
+      toast.error(er.message);
     })
   };
 
@@ -115,20 +119,26 @@ export default function CompanyManipulate(): JSX.Element {
     reset();
   }
 
-  function sendCompany(company: userModel): void {
-    companyId ? updateCompany(company) : addCompany(company);
+  function sendCompany(company: regCompanyModel): void {
+    isUpdate ? updateCompany(company) : addCompany(company);
   }
 
-  console.log("isUpdate : ", isUpdate);
-
+  const exit = () => {
+    isUpdate ?
+      navi("/admin/company/" + companyId)
+      :
+      navi("/admin/1")
+  }
 
   return (
-    <div className="CompanyManipulate">
+    <>
       {isLoading ? (
-        <App />
+        <Loader />
       ) : (
-        <>
-          <h1>{companyId ? "Update " : "Add "} Company</h1>
+        <div className="CompanyManipulate">
+          <div className="header">
+            <h1>{companyId ? "Update " : "Add "} Company</h1>
+          </div>
           <form className="companyForm" onSubmit={handleSubmit(sendCompany)}>
             <div className="fields">
 
@@ -142,22 +152,23 @@ export default function CompanyManipulate(): JSX.Element {
               <span className="inputError">{errors.email?.message}</span>
 
               <label htmlFor="password" className="companyManipulate">Password</label>
-              <input type="text" placeholder="Password" {...register("password")} />
+              <input type="password" placeholder="Password" {...register("password")} />
               <span className="inputError">{errors.password?.message && passwordErrorMessage}</span>
-            
+
               <label htmlFor="confirmPassword" className="companyManipulate">Confirm password</label>
-              <input type="text" placeholder="Confirm password" {...register("confirmPassword")} />
+              <input type="password" placeholder="Confirm password" {...register("confirmPassword")} />
               <span className="inputError">{errors.confirmPassword?.message}</span>
 
             </div>
 
-            <div className="btu">
+            <div className="button">
               <button disabled={Object.keys(errors).length !== 0} type="submit">{companyId ? "Save" : "Add"}</button>
               <button onClick={resetForm}>Reset Form</button>
+              <button onClick={exit}>Exit</button>
             </div>
           </form>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }

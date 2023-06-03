@@ -1,0 +1,38 @@
+.BuyAction {
+    height: 60%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+}
+.BuyAction  .head{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.BuyAction  .body{
+    height: 60%;
+    width: 90%;
+    display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+}
+
+.BuyAction  .body .detailPic{
+    scale: 1;
+border: groove 3px orange;
+}
+.BuyAction  .body .bodyText p{ 
+color: aliceblue;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.BuyAction  .body.bodyText .price{
+
+}
+.BuyAction .buttons{
+
+}

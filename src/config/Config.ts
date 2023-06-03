@@ -7,7 +7,7 @@ class DevConfig extends Config {
   categories: string =        "http://localhost:8080/api/v1/categories";
   companies: string = "http://localhost:8080/api/v1/companies";
   customers: string = "http://localhost:8080/api/v1/customers";
-  login: string = "http://localhost:8080/api/v1/auth/login";
+  auth: string = "http://localhost:8080/api/v1/auth";
 }
 
 class ProdConfig extends Config {
@@ -15,7 +15,7 @@ class ProdConfig extends Config {
   categories: string = "";
   companies: string = "";
   customers: string = "";
-  login: string = "";
+  auth: string = "";
 }
 
 const appConfig =

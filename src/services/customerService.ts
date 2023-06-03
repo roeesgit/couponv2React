@@ -3,6 +3,7 @@ import appConfig from "../config/Config";
 import {
   CustomerActionType,
   customerStore,
+  getAddAction,
   getDeleteAction,
   getFetchAction,
   getUpdateAction,
@@ -12,80 +13,76 @@ import customerModel from "../models/customerModel";
 import regCustomerModel from "../models/regCustomerModel";
 
 class CustomerService {
-async  getCustomerByEmail(email: string) : Promise<customerModel>{
-    const res = await axios.get<customerModel>(appConfig.customers+"/"+email,
-    { headers: { "Authorization": "Bearer " + authStore.getState().token } }
-    )
-return res.data;
-  }
- async getCustomerById(customerId: number):Promise<customerModel>{
-  let customerToGet : customerModel;
-  if (customerStore.getState().customerList.length === 0) {
-  const response = await axios.get<customerModel>(
-    appConfig.companies+"/"+customerId,
-    { headers: { "Authorization": "Bearer " + authStore.getState().token } }
-  )
-  customerToGet = response.data;
-  }else{
-    const companyIndex : number = customerStore.getState().customerList.findIndex(c=> c.id===customerId);
 
-    customerToGet = customerStore.getState().customerList[companyIndex];
-  }
 
-  return customerToGet;
-  }
-  async addCustomer(customer: customerModel): Promise<void> {
+  async addCustomer(customer: regCustomerModel): Promise<customerModel> {
     const response = await axios.post<customerModel>(
       appConfig.customers,
-      customer, 
+      customer,
       { headers: { "Authorization": "Bearer " + authStore.getState().token } }
     );
-    customerStore.dispatch({
-      type: CustomerActionType.AddCustomer,
-      payload: response.data,
-    });
+    customerStore.dispatch(getAddAction(response.data));
+    return response.data;
   }
-  async updateCustomer(customer: regCustomerModel, customerId:number): Promise<void> {
+  
+  async updateCustomer(customer: regCustomerModel, customerId: number): Promise<void> {
     const response = await axios.put<customerModel>(
-      appConfig.customers+"/"+customerId,
-      customer, 
+      appConfig.customers + "/" + customerId,
+      customer,
       { headers: { "Authorization": "Bearer " + authStore.getState().token } }
     );
-    customer.password="";
+    customer.password = "";
     customer.confirmPassword = "";
-    customerStore.dispatch(getUpdateAction(response.data,customerId));
+    customerStore.dispatch(getUpdateAction(response.data, customerId));
   }
+
   async deleteCustomerById(customerId: number): Promise<void> {
-    const response = await axios.delete<void>(
-      appConfig.customers+"/"+customerId, 
+    await axios.delete(
+      appConfig.customers + "/" + customerId,
       { headers: { "Authorization": "Bearer " + authStore.getState().token } }
     );
     customerStore.dispatch(getDeleteAction(customerId));
   }
 
-
   async getAll(): Promise<customerModel[]> {
     if (customerStore.getState().customerList.length === 0) {
       console.log("customers from db");
+      console.log(2);
       
       const response = await axios.get<customerModel[]>(appConfig.customers, {
         headers: { "Authorization": "Bearer " + authStore.getState().token },
       });
       customerStore.dispatch(getFetchAction(response.data));
-      console.log(response.data);
-      
-    }else{
+    } else {
       console.log("customers from state");
     }
     return customerStore.getState().customerList;
   }
 
 
+  // async getCustomerByEmail(email: string): Promise<customerModel> {
+  //   const res = await axios.get<customerModel>(appConfig.customers + "/" + email,
+  //     { headers: { "Authorization": "Bearer " + authStore.getState().token } }
+  //   )
+  //   return res.data;
+  // }
+  // async getCustomerById(customerId: number): Promise<customerModel> {
+  //   let customerToGet: customerModel;
+  //   if (customerStore.getState().customerList.length === 0) {
+  //     const response = await axios.get<customerModel>(
+  //       appConfig.companies + "/" + customerId,
+  //       { headers: { "Authorization": "Bearer " + authStore.getState().token } }
+  //     )
+  //     customerToGet = response.data;
+  //   } else {
+  //     const companyIndex: number = customerStore.getState().customerList.findIndex(c => c.id === customerId);
 
-  getCustomerFromState(customerId : number):customerModel{
-    const indexToFind = customerStore.getState().customerList.findIndex(c=>c.id===customerId)
-    return customerStore.getState().customerList[indexToFind];
-  }
+  //     customerToGet = customerStore.getState().customerList[companyIndex];
+  //   }
+
+  //   return customerToGet;
+  // }
+
 }
 
 const customerServiceObj = new CustomerService();

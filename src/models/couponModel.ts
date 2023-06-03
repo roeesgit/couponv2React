@@ -8,5 +8,5 @@ export default interface couponModel{
         amount:number,
         price:number,
         image:string,
-        
+        companyId:number
 }

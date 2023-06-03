@@ -5,11 +5,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import customerServiceObj from "../../../services/customerService";
-import App from "../../Layout/Loading/App";
 import regCustomerModel from "../../../models/regCustomerModel";
 import customerModel from "../../../models/customerModel";
 import { ErrorMessage } from "../../../models/ErrorMessageModel";
 import "./CustomerManipulate.css";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../Loader/Loader";
 
 
 
@@ -20,8 +22,10 @@ export default function CustomerManipulate(): JSX.Element {
 
     const params = useParams();
     const customerId: number = +params.customerId!;
+    const isUpdate = customerId ? true : false;
 
-    const customerManipulated = useRef<customerModel>(customerServiceObj.getCustomerFromState(customerId));
+    const customerManipulated = useRef<customerModel>(
+        customerStore.getState().customerList.filter(c => c.id === customerId)[0]);
 
 
     const schema = yup.object().shape({
@@ -86,25 +90,27 @@ export default function CustomerManipulate(): JSX.Element {
         customerServiceObj
             .addCustomer(customer)
             .then(() => {
+                toast.success(customer.firstName +" is now a new Customer")
                 setIsLoading(false);
                 navi("/admin/2");
             })
             .catch((e) => {
                 setIsLoading(false);
                 let errorMessage: ErrorMessage = e.response.data;
-                alert(errorMessage.message);
+                toast.error("add customer " + errorMessage.message);
             });
-    };
-
-    const updateCustomer = async (customer: regCustomerModel) => {
-        setIsLoading(true);
-        customerServiceObj.updateCustomer(customer, customerId).then(() => {
+        };
+        
+        const updateCustomer = async (customer: regCustomerModel) => {
+            setIsLoading(true);
+            customerServiceObj.updateCustomer(customer, customerId).then(() => {
+            toast.success("Customer with ID: "+customerId+" Updated")
             setIsLoading(false);
-            navi("/admin/2");
+            navi("/admin/customer/" + customerId);
         }).catch(e => {
             setIsLoading(false);
             const er: ErrorMessage = e.response.data;
-            alert(er.message);
+            toast.error(er.message);
         })
     };
 
@@ -113,17 +119,26 @@ export default function CustomerManipulate(): JSX.Element {
     }
 
     function sendCustomer(customer: regCustomerModel): void {
-        customerId ? updateCustomer(customer) : addCustomer(customer);
+        isUpdate ? updateCustomer(customer) : addCustomer(customer);
+    }
+
+    const exit = () => {
+        isUpdate ?
+            navi("/admin/customer/" + customerId)
+            :
+            navi("/admin/2")
     }
 
 
     return (
-        <div className="CustomerManipulate">
+        <>
             {isLoading ? (
-                <App />
+                <Loader />
             ) : (
-                <>
+                <div className="CustomerManipulate">
+                    <div className="header">
                     <h1>{customerId ? "Update " : "Add "} Customer</h1>
+                    </div>
                     <form className="customerForm" onSubmit={handleSubmit(sendCustomer)}>
                         <div className="fields">
 
@@ -140,23 +155,25 @@ export default function CustomerManipulate(): JSX.Element {
                             <span className="inputError">{errors.email?.message}</span>
 
                             <label htmlFor="password" className="customerManipulate">Password</label>
-                            <input type="text" placeholder="Password" {...register("password")} />
+                            <input type="password" placeholder="Password" {...register("password")} />
                             <span className="inputError"> {errors.password?.message && passwordErrorMessage}</span>
 
                             <label htmlFor="confirmPassword" className="customerManipulate">Confirm password</label>
-                            <input type="text" placeholder="Confirm password" {...register("confirmPassword")} />
+                            <input type="password" placeholder="Confirm password" {...register("confirmPassword")} />
                             <span className="inputError">{errors.confirmPassword?.message}</span>
 
                         </div>
-                        <div className="btu">
+                        <div className="button">
                             <button disabled={Object.keys(errors).length != 0} type="submit">{customerId ? "Save" : "Add"} customer</button>
                             <button onClick={resetForm}>Reset Form</button>
+                            <button onClick={exit}>exit</button>
+
                         </div>
                     </form>
-                </>
+                </div>
             )}
 
-        </div>
+        </>
     )
 
 

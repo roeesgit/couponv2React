@@ -37,10 +37,10 @@ export function addCoupon(coupon: couponModel): couponAction {
     return { type: couponActionType.AddCoupon, payload: coupon }
 }
 export function updateCoupon(coupon: couponModel): couponAction {
-    return { type: couponActionType.UpdateCoupon, payload: coupon }
+    return { type: couponActionType.UpdateCoupon, payload:coupon }
 }
-export function deleteCoupon(coupon: couponModel): couponAction {
-    return { type: couponActionType.DeleteCoupon, payload: coupon }
+export function deleteCoupon(id: number): couponAction {
+    return { type: couponActionType.DeleteCoupon, payload: id }
 }
 
 
@@ -61,17 +61,24 @@ export function couponReducer(currentState: couponState = new couponState, actio
 
         case couponActionType.GetCoupons:
             newState.couponList = action.payload
-            newState.couponList.map(c => {
-                c.endDate = new Date(c.endDate);
-                c.startDate = new Date(c.startDate); })
+            // newState.couponList.map(c => {
+            //     c.endDate = new Date(c.endDate);
+            //     c.startDate = new Date(c.startDate); })
             break;
 
         case couponActionType.AddCoupon:
+            const coupon : couponModel = action.payload;
+            // console.log(coupon);
+            // console.log(coupon.endDate);
+            // console.log(coupon.endDate.toLocaleDateString);
+            
+            // coupon.endDate = new Date(coupon.endDate);
+            // coupon.startDate = new Date(coupon.startDate);
             newState.couponList.push(action.payload)
             break;
 
         case couponActionType.UpdateCoupon:
-            const indexToUpdate = newState.couponList.findIndex(pro => pro.id === action.payload)
+            const indexToUpdate = newState.couponList.findIndex(pro => pro.id === action.payload.id)
             newState.couponList[indexToUpdate] = action.payload;
             break;
 

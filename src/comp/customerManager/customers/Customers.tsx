@@ -2,64 +2,83 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import "./Customers.css";
 import customerModel from "../../../models/customerModel";
 import customerServiceObj from "../../../services/customerService";
-import { NavLink, unstable_HistoryRouter, useNavigate } from "react-router-dom";
-import CustomerCard from "../customerCard/CustomerCard";
+import { NavLink, useNavigate } from "react-router-dom";
 import { customerStore } from "../../../states/CustomerState";
-import App from "../../Layout/Loading/App";
-// import { useHistory  } from 'react-router-dom';
-interface Props {
-  customers: customerModel[];
-}
+import { ErrorMessage } from "../../../models/ErrorMessageModel";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../Loader/Loader";
+
+
 export default function Customers(): JSX.Element {
   const [customers, setCustomers] = useState<customerModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState<customerModel|null>(null);
   const navi = useNavigate();
-  
-  
+
   useEffect(() => {
     getCustomers();
-  }, [selectedCustomer]);
-  
-  
-  const getCustomers =  function () {
+  }, []);
+
+
+  const getCustomers = () => {
     setIsLoading(true);
-    customerServiceObj.getAll().then((res)=>{
+    customerServiceObj.getAll().then((res) => {
       setCustomers(res);
       setIsLoading(false);
-    }).catch (e=>{
+    }).catch(e => {
+      console.log(1);
+      let errorMessage: ErrorMessage = e;
+      toast.error(errorMessage.message);
       setIsLoading(false);
-      alert(e);
-    }) 
+
+    })
   };
-  
-  const deleteCustomer = function (customerId : number){
-      setIsLoading(true);
-      customerServiceObj.deleteCustomerById(customerId).then(()=>{
+
+
+  const handlecustomerDetails = (customer: customerModel) => {
+    navi("/admin/customer/" + customer.id)
+  };
+
+  const deleteCustomer = (customerId: number) => {
+    setIsLoading(true);
+    customerServiceObj
+      .deleteCustomerById(customerId)
+      .then(() => {
+        toast.success("customer ID:" + customerId + " deleted");
         setIsLoading(false);
-      }).catch(e=>{
+      }).catch(e => {
         setIsLoading(false);
-        alert(e)
+        let errorMessage: ErrorMessage = e.response.data;
+        toast.error("deleteCustomer: " + errorMessage.message);
       })
   }
 
 
 
-  
-  const handleEdit = (customer: customerModel) => {
-    navi("/admin/customer/"+customer.id)
-    // setSelectedCustomer(customer);
-  };
-  
+
+  // const handleEdit =  (customer: customerModel) => {
+  //   navi("/admin/customer/" + customer.id)
+  //   // setSelectedCustomer(customer);
+  // };
+
   const handleDelete = (customer: customerModel) => {
-    const userResponse = window.confirm("Are you sure?");
-    if (userResponse){
-      deleteCustomer(customer.id);
-    }
-    setSelectedCustomer(customer);
+    toast.info(<div className="MyToastDelete">
+      <span>delete customer?</span>
+      <button
+        className="toastDeleteButton"
+        onClick={() => deleteCustomer(customer.id)}
+      >
+        Delete
+      </button>
+    </div>,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+      }
+    )
   }
-  
-  
+
+
   function filterByName(e: ChangeEvent<HTMLInputElement>) {
     e.target.value &&
       setCustomers(
@@ -70,62 +89,70 @@ export default function Customers(): JSX.Element {
       );
     e.target.value == "" && setCustomers(customerStore.getState().customerList);
   }
-  
+
+
   return (
     <div className="Customers listContianer">
-    {isLoading?
-  <App/>
-  :
-  <>
-      <div className="listErae">
-          <div className="navLinkHolder">
-        <NavLink to="customer" >
-            <p className="addCustomerBtu">AddCustomer</p>
-        </NavLink>
-          </div>
-        <div className="filers">
-          <input
-            type="text"
-            placeholder="filter by name"
-            onChange={filterByName}
-            />
-        </div>
-        <div className="customersContianer listHolder">
-          <ol className="customerOl">
-            <div className="oLdetailsHeaders">
-              <div className="oLdetailsHeadersPrincipal">
-                <li>NAME</li>
-                <li>EMAIL</li>
-              </div>
-              <div className="oLdetailsAction">
-                <li> EDIT | DELETE </li>
-              </div>
-            </div>
-            {customers.map((customer) => (
-              <ul key={customer.id}>
-                <li>
-                  <button onClick={() => handleEdit(customer)} className="userCardBtu">
+      {isLoading ?
+        <Loader />
+        :
 
-                  <div className="oLdetails">
-                    <div className="oLdetailsfullName">{customer.firstName +" "+ customer.lastName}</div>
-                    <div className="oLdetailsemail"> {customer.email}</div>
+        <div className="listArea">
+          <div className="navLinkHolder">
+            <NavLink to="/admin/customer/customerDetails" >
+              <p className="addCustomerbutton">Add Customer</p>
+            </NavLink>
+          </div>
+          <div id="top" className="filers">
+            <input
+              type="text"
+              placeholder="filter by name"
+              onChange={filterByName}
+            />
+          </div>
+          {customers.length > 0 ?
+        
+              <div className="customersContianer listHolder">
+                <ol className="customerOl">
+                  <div className="oLdetailsHeaders">
+                    <div className="oLdetailsHeadersPrincipal">
+                      <li>NAME</li>
+                      <li>EMAIL</li>
+                    </div>
+                    <div className="oLdetailsAction">
+                      <li> DELETE </li>
+                    </div>
                   </div>
-                    </button>
-                  <div className="oLdetailsbtns">
-                    <button
-                      className="delete"
-                      onClick={() => handleDelete(customer)}
-                      >
-                      Delete
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            ))}
-          </ol>
+                  {customers.map((customer) => (
+                    <ul key={customer.id}>
+                      <li>
+                        <button onClick={() => handlecustomerDetails(customer)} className="userCardbutton">
+
+                          <div className="oLdetails">
+                            <div className="oLdetailsfullName">{customer.firstName + " " + customer.lastName}</div>
+                            <div className="oLdetailsemail"> {customer.email}</div>
+                          </div>
+                        </button>
+                        <div className="oLdetailsbtns">
+                          <button className="delete" onClick={() => handleDelete(customer)}>
+                            Delete
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  ))}
+
+                </ol>
+              </div>
+
+              :
+              <div className="emptyList">
+                <h1>No customers... </h1>
+              </div>
+              }
+            </div>
+
+}
         </div>
-      </div>
-      </>}
-    </div>
   );
 }

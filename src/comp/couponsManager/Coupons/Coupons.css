@@ -1,16 +1,53 @@
 .Coupons {
     height: 100%;
     width: 100%;
-
-
 }
 
+.Coupons .couponsShowCase .filter select option {
+background-color: transparent ;
+background: none;
+}
+.Coupons .couponsShowCase .filter select:focus {
+    background: rgba(39, 64, 119, 0.379);
+    width: 30%;
+}
+
+.Coupons .couponsShowCase .filter input  {
+    
+    background: rgba(79, 107, 167, 0.534);
+    
+}
+
+.Coupons .couponsShowCase .filter input::placeholder {
+    color: rgb(255, 255, 255);
+}
+.Coupons .couponsShowCase .filter input , select {
+    width: 30%;
+    padding: 1%;
+    border: none;
+    background: rgba(57, 76, 116, 0.265);
+    border-top: 2px solid rgb(255, 255, 255) ;
+    border-bottom: 2px solid rgb(255, 255, 255) ;
+    /* background: none; */
+    color: aliceblue;
+    font-family: 'Times New Roman', Times, serif;
+    backdrop-filter: blur(10px);
+}
+.Coupons .couponsShowCase .filter {
+width: 100%;
+display: flex;
+align-items: center;
+margin: 4%;
+justify-content: space-around;
+
+}
 .Coupons .couponsShowCase {
     height: 100%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    align-items: start;
+    justify-content: center;
     gap: 30px;
 }
 

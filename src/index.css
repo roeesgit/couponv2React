@@ -1,7 +1,10 @@
 html {
-  height: 100%;
-  width: 100%;
-  background-image: url("./Assets/images/coubg.png");
+  height: 100dvh;
+  width: 100dvw;
+  /* background-image: url("./Assets/images/coubg.png"); */
+  background-image: url("./Assets/images/nice.png");
+  /* background-image: url("C:\Users\LenovoPC\Desktop\WhatsApp Image 2023-04-02 at 11.17.39.jpg"); */
+  /* background-color: hsl(219, 79%, 72%); */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -22,6 +25,7 @@ body {
 body * {
   margin: 0;
   padding: 0;
+  caret-color: transparent;
 }
 
 body::-webkit-scrollbar {
@@ -30,6 +34,7 @@ body::-webkit-scrollbar {
 
 * input {
   margin-bottom: 5px;
+  caret-color: black;
 }
 
 :root {
@@ -48,7 +53,7 @@ body::-webkit-scrollbar {
   --shodw-base-size: 0.1vh;
   --shodw-base-blur: 24vh;
   --shodw-base-negative-size: 6vh;
-  --color-blue-neon: #ce8c08;
+  --color-gold-neon: #ce8c08;
   --color-gold-brown: #80570a;
   --logo-shadow-gold: #ffc800;
   --logo-shadow-white: #ffffff;
@@ -56,6 +61,7 @@ body::-webkit-scrollbar {
   --logo-shadow-red: #b80101d1;
   --logo-shadow-x: #fffffffb;
 
+  --alertColor: #900f0ff7;
   --companyColor: #3e2ca2a5;
   --companyColor-heder: #3e2ca2;
   --customerColor: #3ca22ca5;
@@ -63,13 +69,57 @@ body::-webkit-scrollbar {
   --couponColor: #af990f9b;
 }
 
+.scrollUp::after {
+  content: "Up";
+  position: absolute;
+  bottom: -50%;
+  right: 17%;
+  border-radius: 10%;
+  text-shadow: 0px 3px 2px rgba(0, 0, 0, 0.54);
+  background-color: var(--color-gold-neon);
+  color: #060606;
+  font-size: 1.3rem;
+  /* border: groove 3px orange; */
+
+}
+
+.toastDeleteButton {
+  width: 30%;
+  background-color: transparent;
+  border: none;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 600;
+}
+
+.MyToastDelete {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.MyToastDelete .toastDeleteButton:hover {
+  scale: 1.4;
+  background-color: var(--alertColor);
+  color: white;
+}
+
+.emptyList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 200px;
+}
+
+
 /* ERROR */
 .inputError {
   background-color: #000000;
   border-radius: 10px;
-  color: #f72216;
+  color: #761914;
   text-shadow: 0 0 10px 5px rgb(0, 0, 0);
-  padding: 1px;
+  padding: 5px;
 }
 
 
@@ -77,7 +127,7 @@ body::-webkit-scrollbar {
 
 /* LIST EREA */
 
-.listErae {
+.listArea {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,12 +135,11 @@ body::-webkit-scrollbar {
   height: 100%;
 }
 
-.listErae .filers>input {
+.listArea .filers>input {
   height: 100%;
   width: 100%;
   margin: var(--font1-sizeVW);
   color: #0875ce;
-  font-size: 1.5rem;
   font-weight: 600;
 }
 
@@ -115,10 +164,12 @@ body::-webkit-scrollbar {
 
 .oLdetailsemail {
   width: 50%;
-  border-left: 2px solid black;
+  border-left: 2px solid rgba(92, 10, 174, 0.5);
+  padding-left: 5px;
 }
 
 .oLdetailsfullName {
+  border-right: 2px solid rgba(85, 22, 211, 0.5);
   width: 50%;
 }
 
@@ -128,13 +179,14 @@ body::-webkit-scrollbar {
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+  height: 100%;
   padding: 1rem;
   align-items: center;
   background: rgba(253, 253, 253, 0.973);
-  border-radius: 8%;
-  box-shadow: inset -1px 1px 19px #000000, inset 1px -1px 32px #000000,
-    5px 5px 12px rgba(0, 0, 0, 0.517);
+  /* border-radius: 8%; */
+  /* box-shadow: inset -1px 1px 19px #000000, inset 1px -1px 32px #000000,
+    5px 5px 12px rgba(0, 0, 0, 0.517); */
 
   color: rgb(0, 0, 0);
 }
@@ -189,30 +241,34 @@ body::-webkit-scrollbar {
   justify-content: center;
   border-radius: 50%;
   border: groove 3px rgba(10, 10, 10, 0.254);
-  width: 40%;
+  width: 50%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.756);
-  /* overflow-anchor: hidden; */
   box-shadow: inset 0px 0px 10px 1px rgba(245, 163, 0, 0.874);
 }
 
-.listErae>a {
+
+.listUpButton {
+  position: sticky;
+  bottom: 20px;
+  right: 10px;
   display: flex;
-  height: 100%;
-  width: 50%;
-  border: groove 30px orange;
-  /* margin-bottom: calc(var(--font1-sizeVW)); */
+  justify-content: end;
+  width: 105%;
+  text-shadow: 0 0 3px 23px rgb(214, 213, 212);
+  color: #c3d00a;
+
 }
 
 .addCustomerContainer {
   height: 100%;
 }
 
-.navLinkHolder .addCustomerBtu {
+.navLinkHolder .addCustomerbutton {
   color: var(--customerColor);
 }
 
-.navLinkHolder .addCompanyBtu {
+.navLinkHolder .addCompanybutton {
   color: var(--companyColor);
   text-shadow: 0 0 1px rgb(252, 252, 252);
 }
@@ -314,12 +370,13 @@ ol {
   border: 10px solid #e6e6e6;
   border-radius: 20px;
   box-shadow: 0 0 20px #e6e6e6, inset 0 0 20px 20px black;
+  display: flex;
+  flex-direction: column;
 }
 
 ol li button {
   height: 100%;
   width: 100%;
-  font-size: 2rem;
   background-color: transparent;
   border: none;
 }
@@ -332,23 +389,38 @@ ol li button {
   background-color: var(--companyColor);
 }
 
+.oLdetailsHeadersPrincipal {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
 .oLdetailsAction {
-  width: 50%;
+  width: 20%;
 }
 
 .oLdetailsHeaders * li {
   background-color: transparent;
+  display: flex;
+  padding-left:10px ;
+  justify-content: start;
+  box-sizing: border-box;
+  
 }
 
 .oLdetailsHeaders {
   position: sticky;
   top: 10vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   border-bottom: solid 3px #000000;
+  border-radius: 5px 5px 0 0;
+  padding-top: 30px;
 }
 
 .customerOl .oLdetailsHeaders {
@@ -359,49 +431,51 @@ ol li button {
   background-color: var(--companyColor-heder);
 }
 
-.oLdetailsHeadersPrincipal {
-  width: 50%;
-  display: flex;
-  justify-content: space-around;
-}
 
 ol li {
-  /* padding: 20px; */
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #f2f2f2dd;
-  margin-bottom: 0.5rem;
-  padding: 1%;
+  align-items: end;
+  border-bottom: 2px solid black;
 }
 
+
 ol li .oLdetailsbtns {
-  height: 100%;
+  height: 80%;
   width: 20%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  padding: 1px;
+  justify-content: center;
 }
 
 ol li .oLdetailsbtns button {
-  background-color: #7a0b0dd0;
+  /* border: groove 3px orange; */
+  box-sizing: border-box;
+  background-color: #000000;
+  width: 80%;
+  height: 80%;
   color: #fff;
   border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  margin-left: -20px;
-  /* margin-right:20px ; */
 }
 
 ol li .oLdetailsbtns .delete:hover {
-  background-color: #f2251b;
-  transform: translate(10px, -10px);
+  background-color: #671713;
+scale: 1.2;  
+  transform: translate(-20px, 0px);
 }
 
 .oLdetails {
-  width: 70%;
-  font-size: 1.4rem;
-  height: 80%;
+  width: 90%;
+  height: 100%;
   display: flex;
-  justify-content: space-around;
+  padding-top: 10px;
+}
+.oLdetails:hover {
+  box-shadow: inset 0 0 15px 2px rgba(245, 222, 179, 0.502);
+  background-color: #e7edf280;
+  
+
 }

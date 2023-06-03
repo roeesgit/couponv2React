@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    width: 30%;
+    /* height: 70%; */
+    width: 50%;
     background-color:var(--companyColor);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -12,6 +12,15 @@
     border-left: 5px double black;
     border-right: 2px solid black;
     border-bottom: 5px double black;
+    padding: 5%;
+}
+ 
+.CompanyManipulate .header{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px groove var(--couponColor);
+
 }
 
 .CompanyManipulate .companyForm {
@@ -27,9 +36,10 @@
     display: flex;
     flex-direction: column;
     row-gap: 7px;
-    align-items: center;
+    align-items: start;
     height: 100%;
-    width: 100%;
+    width: 70%;
+    padding-top: 5%;
 }
 
 .CompanyManipulate .companyForm .fields>label {
@@ -51,17 +61,19 @@
     padding-left: calc(var(--customPadding)/2);
 }
 
-.CompanyManipulate .companyForm  .btu{
+.CompanyManipulate .companyForm  .button{
     display: flex; 
     height: 20%;
     width: 100%;
     justify-content: space-around;
+    padding-top: 5%;
 }
-.CompanyManipulate .companyForm  .btu button{
+.CompanyManipulate .companyForm  .button button{
     width: 40%;
     height: 100%;
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.309);
+    padding: 15px;
+    background-color: black;
+    color: aliceblue;
     border: 5px double rgb(215, 170, 21);
     border-radius: 80% 0  80% 0;   
 

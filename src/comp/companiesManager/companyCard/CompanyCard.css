@@ -1,15 +1,69 @@
 .CompanyCard{
-    width: 70%;
-    height: 40%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: center; */
-    border: groove 3px orange;
-
+    align-items: center;
+    justify-content: space-around;
 }
 
-.CompanyCard .goBackHolder{
+.CompanyCard .companyCardHolder {
+    width: 70%;
+    height: 60%;
+    display: flex;
+    background-color: var(--companyColor);
+    border-radius: 12px;
+}
+.CompanyCard .companyCardHolder .piHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    
 
-    border: groove 3px orange;
+}
+.CompanyCard .companyCardHolder .piHolder .pic{
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+}
+
+.CompanyCard .companyCardHolder .princials h1{
+    box-sizing: border-box;
+
+}
+.CompanyCard .companyCardHolder .princials{
+    
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.CompanyCard .buttonNavigation {
+    width: 70%;
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+}
+.CompanyCard .buttonNavigation button{
+    padding-left: 20px;
+    padding-right: 20px;
+    background: none;
+    border: none;
+    border-radius: 12px;
+    color: rgb(255, 255, 255);
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color:black;
+}
+
+.CompanyCard .buttonNavigation button:hover{
+
+    scale: 1.3;
+
+    transition: ease-in-out 0.3s;
+
 }

@@ -1,11 +1,82 @@
-.Footer{
+.Footer {
     height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background-color: #27292cbf;
-width: 100%;
-overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #27292cbf;
+    width: 100%;
+    overflow: hidden;
+    /* border: groove 3px orange; */
+}
+
+
+.Footer .quotesArea {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* border: groove 3px rgb(0, 255, 42); */
+}
+
+.Footer .spacHolder {
+
+    width: 10%;
+    height: 100%;
+    border-left: 1px solid rgb(255, 255, 255);
+    border-right: 1px solid rgb(255, 255, 255);
 
 }
+
+.Footer .buttonArea {
+    width: 5%;
+    background: none;
+    font-size: 2.5rem;
+    color: azure;
+    display: flex;
+    justify-content: start;
+    padding: 10px;
+}
+
+.Footer .socialMediaArea , .spacHolder{
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 25%;
+    background: none;
+    font-size: 1.5rem;
+    color: azure;
+    display: flex;
+    align-items:center ;
+    justify-content: space-around;
+
+    /* border: groove 3px orange; */
+
+
+}
+
+.Footer .socialMediaArea .icon:hover {
+
+    scale: 2;
+    transform: rotate(360deg);
+    transition: ease-in-out 0.4s;
+
+}
+
+.Footer p {
+    color: rgb(180, 185, 188);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 0.8rem;
+    font-style: italic;
+    padding: 2px;
+}
+
+.Footer span {
+    color: rgb(180, 185, 188);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px;
+}
+

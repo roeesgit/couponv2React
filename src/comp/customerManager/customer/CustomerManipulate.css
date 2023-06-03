@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    width: 30%;
+    /* height: 90%; */
+    width: 50%;
     background-color: var(--customerColor);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -12,8 +12,17 @@
     border-left: 5px double black;
     border-right: 2px solid black;
     border-bottom: 5px double black;
+    padding: 5%;
+    
 }
 
+.CustomerManipulate .header{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px groove var(--couponColor);
+
+}
 .CustomerManipulate .customerForm {
     display: flex;
     flex-direction: column;
@@ -27,9 +36,10 @@
     display: flex;
     flex-direction: column;
     row-gap: 7px;
-    align-items: center;
+    align-items: start;
     height: 100%;
-    width: 100%;
+    width: 60%;
+    padding-top: 5%;
 }
 
 .CustomerManipulate .customerForm .fields>label {
@@ -39,29 +49,32 @@
     font-weight: 500;
     color: var(--textColor);
     text-shadow: var(--shadow);
-    width: 50%;
+    width: 70%;
     border-bottom: groove 1px rgb(0, 0, 0);
 }
 
 .CustomerManipulate .customerForm .fields input {
     border-radius: 10px;
     display: flex;
-    width: 50%;
+    width: 100%;
     height:7%;
     padding-left: calc(var(--customPadding)/2);
 }
 
-.CustomerManipulate .customerForm  .btu{
+.CustomerManipulate .customerForm  .button{
     display: flex; 
-    height: 20%;
+    height: 100%;
+    
     width: 100%;
     justify-content: space-around;
 }
-.CustomerManipulate .customerForm  .btu button{
+.CustomerManipulate .customerForm  .button button{
     width: 40%;
     height: 100%;
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.309);
+    padding: 7%;
+    background-color: black;
+    color: aliceblue;
+    
     border: 5px double rgb(215, 170, 21);
     border-radius: 80% 0  80% 0;   
 

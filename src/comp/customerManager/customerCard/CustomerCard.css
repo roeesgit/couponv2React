@@ -1,0 +1,82 @@
+.CustomerCard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.CustomerCard .customerCardHolder {
+    width: 70%;
+    height: 60%;
+    display: flex;
+    background-color: var(--customerColor);
+    border-radius: 12px;
+    padding: 1%;
+}
+.CustomerCard .customerCardHolder .piHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    
+
+}
+.CustomerCard .customerCardHolder .piHolder .pic{
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+    
+}
+
+.CustomerCard .customerCardHolder .princials h1{
+    box-sizing: border-box;
+
+}
+.CustomerCard .customerCardHolder .princials{
+    
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.CustomerCard .buttonNavigation {
+    width: 70%;
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+}
+.CustomerCard .buttonNavigation button{
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    background: black;
+    border-radius: 12px;
+    color: rgb(255, 255, 255);
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    
+}
+
+.CustomerCard .buttonNavigation button:hover{
+
+    scale: 1.3;
+
+    transition: ease-in-out 0.3s;
+
+}
+/* .CustomerCard .buttonNavigation .editbutton{
+    
+    background-color:var(--customerColor);
+}
+.CustomerCard .buttonNavigation .deletebutton{
+    background-color:var(--alertColor);
+}
+.CustomerCard .buttonNavigation .goBackbutton{
+    background-color:var(--color-gold-neon);
+} */

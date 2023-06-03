@@ -3,36 +3,38 @@ import "./AdminView.css";
 import { useEffect, useRef, useState } from "react";
 import Companies from "../companiesManager/companies/Companies";
 import Customers from "../customerManager/customers/Customers";
+import ScrollToTop from "react-scroll-to-top";
 
 export default function AdminView(): JSX.Element {
+
   const [isRender, setIsRender] = useState(false);
   const isCompany = useRef(false);
   const params = useParams();
   const isEmpty = useRef(true)
-  
-useEffect(()=>{
+
+
+  useEffect(() => {
     if (params.renderId) {
-      
       const renderId = +params.renderId
-      console.log(isEmpty.current);
-      
-      isEmpty.current = renderId < 1 && renderId > 2 ;
-      console.log(isEmpty.current);
+      isEmpty.current = renderId < 1 && renderId > 2;
       isCompany.current = renderId === 1;
       setIsRender(true)
     }
-},[])
+  }, [])
+
+
   const handleCompaniesClick = () => {
     setIsRender(!isRender);
     isCompany.current = true;
     isEmpty.current = false;
   };
+
   const handleCustomersClick = () => {
     setIsRender(!isRender);
     isCompany.current = false;
     isEmpty.current = false;
   };
-console.log(isEmpty.current);
+
 
   return (
     <div className="AdminView">
@@ -60,15 +62,16 @@ console.log(isEmpty.current);
 
 
       <div className="showCase">
-        
-        {!isEmpty.current && 
-        <>{
 
-          isCompany.current ?
-          <Companies />
-          :
-          <Customers />}
-        </>
+        {!isEmpty.current &&
+          <>
+          {
+
+            isCompany.current ?
+              <Companies />
+              :
+              <Customers />}
+          </>
         }
 
       </div>

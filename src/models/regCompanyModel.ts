@@ -1,4 +1,4 @@
-export default interface userModel{
+export default interface regCompanyModel{
 
     id:number,
     name:string,

@@ -7,26 +7,25 @@ import "./Login.css";
 import { authStore, logOut } from "../../../states/AuthState";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import App from "../../Layout/Loading/App";
 import { MdAlternateEmail } from 'react-icons/md';
 import { AiFillUnlock } from 'react-icons/ai';
 import resUserModel from "../../../models/resUserModel";
-
+import { ErrorMessage } from "../../../models/ErrorMessageModel";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../Loader/Loader";
 
 export function Login(): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const navi = useNavigate();
 
   const schema = yup.object().shape({
-    username: yup.string().required("Username is required")
-      .matches(/.+@+.+\..+/, "Please provide a valid username address")
-      .min(3, "This field must be at least 3 characters long")
+    username: yup.string()
+    .required("Username is required")
       .max(25, "This field must be less than 25 characters long")
     , password: yup.string()
       .required("Password is required")
       .max(20, "This field must be less than 20 characters long")
-      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?!.*\s).{8,}$/,
-        "Password must contain at least one digit,\none lowercase letter, one uppercase letter, one special character, must not contain spaces, and must be at least 8 characters long")
   });
 
 
@@ -53,16 +52,18 @@ export function Login(): JSX.Element {
       .login(loginModel)
       .then(() => {
         setIsLoading(false);
-        loginTimeOut();
+        loginTimeOutTimer();
       })
       .catch((e) => {
         setIsLoading(false);
-        alert("Incorrect login details");
+        const error : ErrorMessage = e.response.data;
+        console.log(e.message);
+      toast.error(error.message)
       });
   }
 
 
-  function loginTimeOut() {
+  function loginTimeOutTimer() {
     const user: resUserModel = authStore.getState().user!;
     const expiredMillis: number =
       new Date(user.exp * 1000).getTime() - new Date().getTime();
@@ -74,11 +75,10 @@ export function Login(): JSX.Element {
     }, expiredMillis);
   }
 
-
   return (
     <div className="Login">
       {isLoading ?
-        <App />
+        <Loader />
         :
         <>
           <form className="form" onSubmit={handleSubmit(login)}>
@@ -109,7 +109,7 @@ export function Login(): JSX.Element {
             </div>
             {errors.password?.message && (
               <span className="inputError">
-                {passwordErrorMessage}
+                {errors.password.message}
               </span>
             )}
             <div className="btn">
