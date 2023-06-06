@@ -23,11 +23,12 @@
 
 .Header .logo {
   height: 100%;
-  width: 20%;
+  width: 40%;
   transform: rotate(-4deg);
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: start;
+  padding-left: calc(var(--header-shodw-base-location));
 }
 
 .Header .logo>a {
@@ -45,12 +46,12 @@
 }
 
 .Header .headerContainer .spaceHolder {
-  width: 10%;
+  /* width: 10%; */
 }
 
 .Header .headerContainer .homePage {
   height: 80%;
-  width: 10%;
+  width: 7%;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -60,7 +61,7 @@
 
 .Header .headerContainer .homePage .goHome,
 .profile {
-  height: calc(var(--container-height)/2);
+  height: calc(var(--container-height)/3.5);
  
   width: calc(var(--container-width));
   cursor: pointer;
@@ -68,24 +69,24 @@
 }
 
 .Header .greeting {
-  width: 90%;
+  width: 60%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content:end;
+  padding-right:calc(var(--header-shodw-base-location)) ;
 }
 
 .Header .greeting .greetingBox {
-  width: 100%;
+  width: 80%;
   text-shadow: 0rem 0rem calc(var(--font1-sizeVW) /4) #b99e27;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: end;
   font-size: calc(var(--font1-sizeVW) / 1.2);
 }
 
 .Header .greeting .hello {
   height: 100%;
-  width: 83%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -108,7 +109,7 @@
 .Header .greeting .greetingBox .login,
 .logout {
   height: 90%;
-  width: 13%;
+  width: 30%;
   border: none;
   background: transparent;
   display: flex;

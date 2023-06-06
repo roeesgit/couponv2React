@@ -8,8 +8,7 @@
   
                                                                                                                                                
   .CustomerView .contianer {
-    width: calc(var(--container-width) / 1.1);
-    width: 60%;
+    width: calc(var(--container-width) / 2);
     height: calc(var(--container-admin-view-height));
     display: flex;
     align-items: center;

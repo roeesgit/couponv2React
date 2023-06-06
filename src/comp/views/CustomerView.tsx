@@ -26,8 +26,8 @@ export default function CustomerView(): JSX.Element {
                   </div>
                 </div>
               </div>
-            </div>
-          </button>
+          </div>
+            </button>
         </div>
       </div>
       

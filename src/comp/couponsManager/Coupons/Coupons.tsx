@@ -64,7 +64,7 @@ export default function Coupons(props: Props): JSX.Element {
     }
     if (isCompany){
      console.log(isCompany);
-      return <button className='purchase' onClick={handleAddCoupon}>Add coupon</button>
+      return <button className='purchase' onClick={handleAddCoupon}>Add Coupon</button>
     }
     return <span></span>
      }

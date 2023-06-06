@@ -25,6 +25,5 @@
 }
 
 .Layout > footer {
-  /* flex: 0 0 auto; */
-  height: 10vh;
+  height: 6vh;
 }

@@ -45,7 +45,7 @@
 }
 .Footer .supportArea {
     height: 100%;
-    width: 15%;
+    width: 12%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -55,12 +55,12 @@
 }
 
 .Footer .socialMediaArea {
-    height: 100%;
-    width: 25%;
+    height: calc(var(--container-height)/2);
+    width: 20%;
     display: flex;
     align-items: center;
     justify-content: space-around;
-
+    
 
 }
 
@@ -70,8 +70,10 @@
 }
 .icon {
     color: azure;
-    height: 24px;
-    width: 24px;
+    height: calc(var(--container-height)/4);
+    width: calc(var(--container-width));
+  cursor: pointer;
+
 }
 
 

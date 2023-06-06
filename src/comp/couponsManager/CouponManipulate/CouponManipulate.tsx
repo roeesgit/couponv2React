@@ -181,7 +181,26 @@ export default function CouponManipulate(): JSX.Element {
                 <Loader />
             ) : (
                 <>
-                    <h1>{couponId ? "Update " : "Add "} Coupon</h1>
+                 <div className="CustomerManipulate">
+                    <div className="CustomerView">
+                        <div className="contianer">
+                            <div className="box1">
+                                <button className="tugleOption">
+                                    <div className="box">
+                                        <div className="box">
+                                            <div className="box">
+                                                <div className="box">
+                                                    <div className="last-box box">{couponId ? "Update " : "Add "} Coupon</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+               
                     <form className="couponForm" onSubmit={handleSubmit(sendcoupon)}>
                         <div className="fields">
                             <div className="innerField border">

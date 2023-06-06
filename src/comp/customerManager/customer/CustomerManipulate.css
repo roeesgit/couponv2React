@@ -61,13 +61,14 @@
     justify-content: space-around;
 }
 .CustomerManipulate .customerForm  .button button{
-    width: 40%;
-    height: 100%;
-    padding: 7%;
-    background-color: black;
-    color: aliceblue;
     
+    width: 160px;
+    height : 120px;
+    background-color: black;
+    color: azure;
+    word-wrap: break-word;
+    font-size: 1.2rem;
     border: 5px double rgb(215, 170, 21);
-    border-radius: 80% 0  80% 0;   
+    border-radius: 80% 0  80% 0;
 
 }

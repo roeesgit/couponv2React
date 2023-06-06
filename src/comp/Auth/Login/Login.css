@@ -86,21 +86,17 @@
     
     .Login .button1:disabled {
       background-color: none;
-      color: #171717;
-      border: groove 3px orange;
-      scale: 2;
+      color: #757272;
     }
     .Login .button1 {
-      border-radius: 5px;
-      border: none;
-      outline: none;
-      transition: .4s ease-in-out;
-      background-color:transparent;
-      color: white;
+      width: 160px;
+      height : 120px;
+      background-color: black;
+      color: azure;
+      word-wrap: break-word;
       font-size: 1.2rem;
-      padding: 20px;
-      box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.269); border: 5px double rgb(215, 170, 21);
-      border-radius: 80% 0  80% 0;  
+      border: 5px double rgb(215, 170, 21);
+      border-radius: 80% 0  80% 0;
     }
     
     .Login .button1:hover {
