@@ -3,24 +3,15 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* height: 90%; */
-    width: 50%;
-    background-color: var(--customerColor);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: var(--customPadding);
-    border-left: 5px double black;
-    border-right: 2px solid black;
-    border-bottom: 5px double black;
-    padding: 5%;
+    width: 70%;
+    padding: 10px;
     
 }
 
 .CustomerManipulate .header{
-    width: 90%;
+    width: 70%;
     display: flex;
     justify-content: center;
-    border-bottom: 3px groove var(--couponColor);
 
 }
 .CustomerManipulate .customerForm {
@@ -36,7 +27,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 7px;
-    align-items: start;
+    align-items: center;
     height: 100%;
     width: 60%;
     padding-top: 5%;
@@ -44,28 +35,29 @@
 
 .CustomerManipulate .customerForm .fields>label {
     display: flex;
-    align-items: end;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    align-items: center;
+    justify-content: start;
+    /* border: groove 3px orange; */
     font-weight: 500;
-    color: var(--textColor);
+    color: azure;
     text-shadow: var(--shadow);
-    width: 70%;
-    border-bottom: groove 1px rgb(0, 0, 0);
+    width: 80%;
 }
 
 .CustomerManipulate .customerForm .fields input {
-    border-radius: 10px;
+    padding-top: 5px;
     display: flex;
-    width: 100%;
+    width: 80%;
     height:7%;
     padding-left: calc(var(--customPadding)/2);
 }
 
 .CustomerManipulate .customerForm  .button{
+    padding-top: 50px;
     display: flex; 
     height: 100%;
     
-    width: 100%;
+    width: 50%;
     justify-content: space-around;
 }
 .CustomerManipulate .customerForm  .button button{

@@ -30,10 +30,6 @@ export default function CouponDetail(): JSX.Element {
   const startDate: string = new Date(coupon.current?.startDate).toLocaleDateString();
   const endDate: string = new Date(coupon.current?.endDate).toLocaleDateString();
 
-
-  const handleUsenow = () => {
-    isUseNow.current = false;
-  }
   const handleEditCoupon = () => {
     navi("/company/coupon/" + coupon.current?.id)
   }
@@ -73,6 +69,12 @@ export default function CouponDetail(): JSX.Element {
     isCustomer && navi("/customer");
     isCompany && navi("/company")
   }
+
+  const handlePageNotFound = () => {
+
+    navi("/PageNotFound")
+  }
+
   return (
     <>
 
@@ -81,36 +83,59 @@ export default function CouponDetail(): JSX.Element {
 
         :
         <div className="CouponDetail">
-          <div className={"detaileContainer " + contianerClassName.current}>
-            <div className="detailPic">
-              <img src={coupon.current?.image} alt="couponImg" />
+          <div className="contianer">
+            <div className="box1">
+              <button className="tugleOption">
+                <div className="box">
+                  <div className="box">
+                    <div className="box">
+                      <div className="box">
+                        <div className="last-box box">My Coupon</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
             </div>
-            <div className="details">
-              <h1>{coupon.current?.title}</h1>
-              <p>{coupon.current?.category}</p>
-              <p>{coupon.current?.description}</p>
-              {!isCustomer && <p>start date: {startDate}</p>}
-              <p> {isCustomer ? "Use before " : "Expiration"} : {endDate}</p>
-              <div className="price">
-                {!isCustomer && <p>Amount : {coupon.current?.amount}</p>}
-                {!isCustomer && <p>Price : $ {coupon.current?.price} </p>}
+          </div>
+
+
+
+
+          <div className="detailContainer ">
+            <div className="head">
+
+              <div className="detailPic">
+                <img src={coupon.current?.image} alt="couponImg" />
+              </div>
+              <div className="details">
+                <h2>{coupon.current?.title}</h2>
+                <p>{coupon.current?.category}</p>
+                <p>{coupon.current?.description}</p>
+                {!isCustomer && <p>start date: {startDate}</p>}
+                <p> {isCustomer ? "Use before " : "Expiration"} : {endDate}</p>
+                <div className="price">
+                  {!isCustomer && <p>Amount : {coupon.current?.amount}</p>}
+                  {!isCustomer && <p>Price : NIS {coupon.current?.price} </p>}
+                </div>
               </div>
 
-              {isCompany && (
-                <div className="companybutton">
-                  <button onClick={handleEditCoupon}>Edit</button>
-                  <button onClick={handleDeleteCoupon}>Delete</button>
-                </div>
-              )}
-
-              {isCustomer && (
-                <div className="useNow">
-                  <button disabled onClick={handleUsenow}>Use now!!</button>
-                </div>
-              )}
-              <button onClick={exit}>Exit</button>
-
             </div>
+          </div>
+          <div className="buttonsArea">
+
+            {isCompany && (
+              <>
+                <button onClick={handleEditCoupon}>Edit</button>
+                <button onClick={handleDeleteCoupon}>Delete</button>
+              </>
+            )}
+
+            <button onClick={exit}>Close</button>
+            {isCustomer && (
+              <button className="useNow" disabled onClick={handlePageNotFound}>Redeem Coupon</button>
+            )}
+
           </div>
         </div>
       }  </>

@@ -8,6 +8,8 @@ import { ErrorMessage } from "../../../models/ErrorMessageModel";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../Loader/Loader";
+import { FcInfo } from 'react-icons/fc'
+
 export default function Companies(): JSX.Element {
   const [companies, setCompanies] = useState<companyModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -79,7 +81,9 @@ export default function Companies(): JSX.Element {
       );
     e.target.value == "" && setCompanies(companyStore.getState().companyList);
   }
-
+  const handleAddCompany = () => {
+    navi('/admin/customer/customerDetails')
+  }
 
   return (
     <div className="Companies listContianer">
@@ -88,56 +92,65 @@ export default function Companies(): JSX.Element {
         :
         <>
           <div className="listArea">
-            <div className="navLinkHolder ">
-              <NavLink to="/admin/company/companyDetails">
-                <p className="addCompanybutton">Add Company</p>
-              </NavLink>
-            </div> 
-             <div className="filers">
+            <div className="filers">
+              <h3>Start entering text to filter the list: </h3>
+
               <input
                 type="text"
-                placeholder="filter by name"
                 onChange={filterByName}
               />
             </div>
             {companies.length > 0 ?
-                <div className="companiesContianer listHolder">
-                  <ol className="companyOl">
-                    <div className="oLdetailsHeaders">
-                      <div className="oLdetailsHeadersPrincipal">
+              <div className="companiesContianer listHolder">
+                <ol className="companyOl">
+                  <div className="oLdetailsHeaders">
+                    <div className="oLdetailsHeadersPrincipal">
+
+                      <div className="page-help">
+
+                        <FcInfo className="info-icon" />
+                        <p>
+                          Click a customers name to update or delete a customers info.
+                        </p>
+                      </div>
+                      <div className="princpals">
+
+
                         <li>NAME</li>
                         <li>EMAIL</li>
                       </div>
-                      <div className="oLdetailsAction">
-                        <li> DELETE </li>
-                      </div>
                     </div>
-                    {companies.map((company) => (
-                      <ul key={company.id}>
-                        <li>
-                          <button
-                            onClick={() => handlecompanyDetails(company)}
-                            className="userCardbutton"
-                          >
-                            <div className="oLdetails">
-                              <p className="oLdetailsfullName">{company.name}</p>
-                              <p className="oLdetailsemail"> {company.email}</p>
-                            </div>
-                          </button>
+                    <div className="oLdetailsAction">
+                    <button className="addCompany" onClick={handleAddCompany}>Add Company</button>
 
-                          <div className="oLdetailsbtns">
-                            <button
-                              className="delete"
-                              onClick={() => handleDelete(company)}
-                            >
-                              Delete
-                            </button>
+                    </div>
+                  </div>
+                  {companies.map((company) => (
+                    <ul key={company.id}>
+                      <li>
+                        <button
+                          onClick={() => handlecompanyDetails(company)}
+                          className="userCardbutton"
+                        >
+                          <div className="oLdetails">
+                            <p className="oLdetailsfullName">{company.name}</p>
+                            <p className="oLdetailsemail"> {company.email}</p>
                           </div>
-                        </li>
-                      </ul>
-                    ))}
-                  </ol>
-                </div>
+                        </button>
+
+                        <div className="oLdetailsbtns">
+                          <button
+                            className="delete"
+                            onClick={() => handleDelete(company)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  ))}
+                </ol>
+              </div>
               :
               <div className="emptyList">
                 <h1>No companies... </h1>

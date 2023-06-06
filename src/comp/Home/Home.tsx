@@ -29,7 +29,7 @@ function Home(): JSX.Element {
 
       </div>
       <div className="bottomArea">
-        <video autoPlay={true}  className="x" controls>
+        <video className="x" controls>
           <source src={video} type="video/mp4" />
           Your browser does not support the video tag.
         </video>

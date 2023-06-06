@@ -1,4 +1,4 @@
-.BuyAction {
+/* .BuyAction {
     height: 60%;
     width: 70%;
     display: flex;
@@ -28,11 +28,174 @@ border: groove 3px orange;
 }
 .BuyAction  .body .bodyText p{ 
 color: aliceblue;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .BuyAction  .body.bodyText .price{
 
 }
 .BuyAction .buttons{
+
+} */
+
+
+.BuyAction{
+    z-index: 10;
+    height: 100%;
+    width: 100%;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.BuyAction .couponView{
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+/* padding-bottom: 30px; */
+}
+
+.couponView .contianer {
+    width: 60%;
+    height: calc(var(--container-admin-view-height));
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: var(--font1-sizeVW);
+    background-color:black;
+    overflow: hidden;
+    box-shadow: inset 0 0 calc(var(--header-shodw-base-blur)/3 )
+    calc(var(--shodw-base-size) ) rgb(247, 244, 244);
+  }
+  
+  .couponView .contianer button {
+    height: 90%;
+    width: 60%;
+    z-index: 2;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font1-sizeVW);
+    font-weight: 600;
+    color: aliceblue;
+    background-color:var(--color-gold-brown);
+    border: none;
+  }
+  .couponView .contianer .box1 {
+    position: relative;
+    width: 50%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .couponView .contianer .box {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: rgba(5, 5, 5, 0.344);
+  }
+  .couponView .contianer .box1::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 60%;
+    box-shadow:
+    0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-gold-neon),
+      inset 0 0 calc(var(--shodw-base-blur)) calc(var(--shodw-base-size)) var(--color-gold-neon);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    filter: blur(var(--filter));
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .BuyAction .head {
+    padding-left: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    height: 150px;
+    width: 550px;
+  }
+
+
+  .couponView .contianer .last-box {
+    width: 50%;
+  }
+
+.BuyAction .detailPic{
+width: 40%;
+display: flex;
+justify-content: center;
+}
+.BuyAction .detailPic > img{
+width: 130px;
+height: 130px;
+
+
+}
+
+.BuyAction .buttonsArea  {
+    height: 100px;
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+}
+
+.BuyAction .buttonsArea button {
+    width: 30%;
+    height : 80%;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: black;
+    color: aliceblue;
+    word-wrap: break-word;
+    font-size: 1.2rem;
+    border: 5px double rgb(215, 170, 21);
+    border-radius: 80% 0  80% 0;   
+}
+.BuyAction .head .details :nth-child(2){
+
+    padding-top: 10px;
+
+}
+.BuyAction .head .details >*{
+
+    padding-top: 3px;
+
+}
+.BuyAction .head .details{
+    padding-left: 5px;
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: azure;
+}
+
+.head .detailContainer .details .price{
+    display: flex;
+    width: 80%;
+    height: 10%;
+    justify-content: space-around;
+      
+}
+
+
+.head .detailContainer .details .useNow{
+    background: transparent;
+    position: relative;
 
 }

@@ -1,0 +1,81 @@
+.CouponCard2 {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    max-width: 180px;
+    background-color: #fff;
+    color: #212121;
+  }
+  
+ .CouponCard2 .image >img{
+    box-sizing: border-box;
+    height: 8rem;
+    width: 100%;
+ }
+ .CouponCard2 .image {
+    height: 8rem;
+    width: 100%;
+    object-fit: cover;
+    background-color: rgb(204, 0, 255);
+    background-image: linear-gradient(to right, rgb(255, 174, 0), rgb(204, 0, 255));
+  }
+  
+  .CouponCard2 .content {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .CouponCard2 .content .text-1 {
+    font-size: 0.675rem;
+    line-height: 1.25rem;
+    /* font-weight: 600; */
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-bottom: 0.4rem;
+}
+  
+  .CouponCard2 .content .text-2 span{
+    margin-top: 0.;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    /* border: groove 3px orange; */
+  }
+  
+  .CouponCard2 .content.text-2 span:first-child {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 900;
+  }
+  
+  .CouponCard2 .content.text-2 span:last-child {
+    margin-top: 0.5rem;
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  .CouponCard2 .content .action {
+    margin-top: 1rem;
+    display: inline-block;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+  }
+  
+  .CouponCard2 .content .date {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgba(156, 163, 175, 1);
+  }

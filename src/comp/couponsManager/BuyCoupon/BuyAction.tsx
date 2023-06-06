@@ -7,16 +7,18 @@ import { ErrorMessage } from '../../../models/ErrorMessageModel';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../Loader/Loader';
+import { couponStore } from '../../../states/CouponState';
 export default function BuyAction(): JSX.Element {
     const param = useParams();
     const couponId: number = +param.couponId!
-    const coupon = useRef<couponModel>();
+    const coupon = useRef<couponModel>(couponStore.getState().couponList.filter(c => c.id === couponId)[0])
     const [isLoading, setIsLoading] = useState(false);
     const navi = useNavigate();
+    const endDate: string = new Date(coupon.current?.endDate).toLocaleDateString();
 
     useEffect(() => {
         setIsLoading(true);
-        couponServiceObj.getCouponById(couponId).then((res) => {    
+        couponServiceObj.getCouponById(couponId).then((res) => {
             coupon.current = res;
             setIsLoading(false);
         }
@@ -24,7 +26,7 @@ export default function BuyAction(): JSX.Element {
             setIsLoading(false);
             const error: ErrorMessage = e.response.data;
             console.log(error.message);
-            
+
             toast.error(error.message)
         });
     }, [])
@@ -55,34 +57,48 @@ export default function BuyAction(): JSX.Element {
             <Loader />
             :
             <div className="BuyAction">
-
-                    {/* <div className="details"> */}
-                        <div className="head">
-
-                            <h1>{coupon.current?.title}</h1>
-                        </div>
-                        <div className="body">
-                            <div className="detailPic">
-                                <img src={coupon.current?.image} alt="couponImg" />
-                            </div>
-                            <div className="bodyText">
-
-
-                                <p>{coupon.current?.category}</p>
-                                <p>{coupon.current?.description}</p>
-                                <p> Expiration   {coupon.current?.endDate + ""}</p>
-                                <div className="price">
-                                    <p>Amount : {coupon.current?.amount}</p>
-                                    <p>Price : $ {coupon.current?.price} </p>
+                <div className="couponView">
+                    <div className="contianer">
+                        <div className="box1">
+                            <button className="tugleOption">
+                                <div className="box">
+                                    <div className="box">
+                                        <div className="box">
+                                            <div className="box">
+                                                <div className="last-box box">My Coupon</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="buttons">
-                            <button onClick={handleBuyCoupon}>BUY</button>
-                            <button onClick={exit}>Exit</button>
+                            </button>
                         </div>
                     </div>
-                // </div>
-        }</>
-    )
+                </div>
+
+
+                <div className={"detailContainer "}>
+                    <div className="head">
+
+                        <div className="detailPic">
+                            <img src={coupon.current?.image} alt="couponImg" />
+                        </div>
+                        <div className="details">
+                            <h2>{coupon.current?.title}</h2>
+                            <p>{coupon.current?.category}</p>
+                            <p>{coupon.current?.description}</p>
+                            <p> "Expiration" : {endDate}</p>
+                            <div className="price">
+                                <p>Amount : {coupon.current?.amount}</p>
+                                <p>Price : NIS {coupon.current?.price} </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div className="buttonsArea">
+                    <button onClick={handleBuyCoupon} >Buy Now</button>
+                </div>
+            </div>
+        }  </>
+    );
 }

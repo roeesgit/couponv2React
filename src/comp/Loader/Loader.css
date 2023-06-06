@@ -1,90 +1,74 @@
-
 .Loader{
-    position: absolute;
-    top :0;
-    left:0;
-    height: 100%;
-    width: 100%;
-    z-index: 999;
-    background-color: rgb(0, 249, 249);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: end;
-}
-.Loader h1{
-    width: 100%;
-    height: 35%;
-    display: flex;
-    justify-content: center;
-    color: orange;
+  position: absolute;
+  height: 100dvh;
+  width: 100dvw;
+  z-index: 99;
+  background-color: rgba(32, 34, 36, 0.699);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.Loader .loader:before {
-    content: '';
-    position: absolute;
-    transform: translate(-50%, -50%) rotate(45deg);
-    height: 23%;
-    width: 4px;
-    background: #fff;
-    left: 50%;
-    top: 50%;
+
+.svg-frame {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.Loader .loader:after {
-    content: '';
-    position: absolute;
-    left: 43.5%;
-    bottom: 39%;
-    width: 1em;
-    height: 1em;
-    background-color: orange;
-    border-radius: 15%;
-    animation: rollingRock 2.5s cubic-bezier(.79, 0, .47, .97) infinite;
+.svg-frame svg {
+  position: absolute;
+  transition: .5s;
+  z-index: calc(1 - (0.2 * var(--j)));
+  transform-origin: center;
+  width: 344px;
+  height: 344px;
+  fill: none;
 }
-  
-  @keyframes rollingRock {
-    0% {
-      transform: translate(0, -1em) rotate(-45deg)
-    }
-  
-    5% {
-      transform: translate(0, -1em) rotate(-50deg)
-    }
-  
-    20% {
-      transform: translate(1em, -2em) rotate(47deg)
-    }
-  
-    25% {
-      transform: translate(1em, -2em) rotate(45deg)
-    }
-  
-    30% {
-      transform: translate(1em, -2em) rotate(40deg)
-    }
-  
-    45% {
-      transform: translate(2em, -3em) rotate(137deg)
-    }
-  
-    50% {
-      transform: translate(2em, -3em) rotate(135deg)
-    }
-  
-    55% {
-      transform: translate(2em, -3em) rotate(130deg)
-    }
-  
-    70% {
-      transform: translate(3em, -4em) rotate(217deg)
-    }
-  
-    75% {
-      transform: translate(3em, -4em) rotate(220deg)
-    }
-  
-    100% {
-      transform: translate(0, -1em) rotate(-225deg)
-    }
+
+.svg-frame:hover  svg {
+  content: "Loading...";
+  transform: rotate(-80deg) skew(30deg) translateX(calc(45px * var(--i))) translateY(calc(-35px * var(--i)));
+}
+
+.svg-frame svg #center {
+  transition: .5s;
+  transform-origin: center;
+}
+
+.svg-frame:hover svg #center {
+  transform: rotate(-30deg) translateX(45px) translateY(-3px);
+}
+
+#out2 {
+  animation: rotate16 7s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+#out3 {
+  animation: rotate16 3s ease-in-out infinite alternate;
+  transform-origin: center;
+  stroke: #ff0;
+}
+
+#inner3,
+#inner1 {
+  animation: rotate16 4s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+#center1 {
+  fill: #ff0;
+  animation: rotate16 2s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes rotate16 {
+  to {
+    transform: rotate(360deg);
   }
-        
+}

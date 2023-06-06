@@ -5,9 +5,16 @@ import { useEffect, useState } from 'react';
 
 export default function CustomerView(): JSX.Element {
 
+  const navi = useNavigate()
+
+  const handleBuyCoupon = ()=>{
+    navi("/customer/coupon/buyCoupon")
+
+  }
   return (
 
     <div className="CustomerView">
+
       <div className="contianer">
         <div className="box1">
           <button className="tugleOption">
@@ -15,7 +22,7 @@ export default function CustomerView(): JSX.Element {
               <div className="box">
                 <div className="box">
                   <div className="box">
-                    <div className="last-box box">My coupons</div>
+                    <div className="last-box box">My Coupons</div>
                   </div>
                 </div>
               </div>
@@ -23,14 +30,10 @@ export default function CustomerView(): JSX.Element {
           </button>
         </div>
       </div>
+      
 
 
       <div className="showCase">
-        <div className="navLinkHolder ">
-          <NavLink to="/customer/coupon/buyCoupon">
-            <p className="addCustomerbutton">Buy Coupon</p>
-          </NavLink>
-        </div>
         <CustomerCoupons />
 
       </div>

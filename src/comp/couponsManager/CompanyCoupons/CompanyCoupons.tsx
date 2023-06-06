@@ -7,10 +7,12 @@ import './CompanyCoupons.css'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 export default function CompanyCoupons(): JSX.Element {
   const [companyCoupons, setcompanyCoupons] = useState<couponModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     setIsLoading(true)
     couponServiceObj

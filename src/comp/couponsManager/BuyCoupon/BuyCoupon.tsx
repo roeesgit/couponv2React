@@ -30,14 +30,36 @@ export default function BuyCoupon():JSX.Element{
 
 
     return (
-
 <div className="BuyCoupon">
-  <h1>Choose a coupon to Purchase</h1>
+      <div className="contianer">
+      <div className="box1">
+        <button className="tugleOption">
+          <div className="box">
+            <div className="box">
+              <div className="box">
+                <div className="box">
+                  <div className="last-box box"> <p>
+                      Choose a coupon to Purchase
+                    </p>
+                    
+                     </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  <h1></h1>
 {isLoading? 
     <Loader/>  
 
     :
+    
+    <div className="showCase">
+
     <Coupons coupons={couponsToPurchase} />
+    </div>
     }
 
 </div>

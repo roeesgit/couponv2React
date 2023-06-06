@@ -3,59 +3,90 @@
     width: 100%;
 }
 
-.Coupons .couponsShowCase .filter select option {
-background-color: transparent ;
-background: none;
-}
-.Coupons .couponsShowCase .filter select:focus {
-    background: rgba(39, 64, 119, 0.379);
-    width: 30%;
-}
-
-.Coupons .couponsShowCase .filter input  {
-    
-    background: rgba(79, 107, 167, 0.534);
-    
-}
-
-.Coupons .couponsShowCase .filter input::placeholder {
-    color: rgb(255, 255, 255);
-}
-.Coupons .couponsShowCase .filter input , select {
-    width: 30%;
-    padding: 1%;
-    border: none;
-    background: rgba(57, 76, 116, 0.265);
-    border-top: 2px solid rgb(255, 255, 255) ;
-    border-bottom: 2px solid rgb(255, 255, 255) ;
-    /* background: none; */
-    color: aliceblue;
-    font-family: 'Times New Roman', Times, serif;
-    backdrop-filter: blur(10px);
-}
-.Coupons .couponsShowCase .filter {
-width: 100%;
-display: flex;
-align-items: center;
-margin: 4%;
-justify-content: space-around;
-
-}
 .Coupons .couponsShowCase {
-    height: 100%;
-    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    align-items: start;
-    justify-content: center;
+    flex-direction: column;
     gap: 30px;
 }
 
-.Coupons .couponsShowCase .sortBy {
-    position: absolute;
-    top: var(--filter-heigth-position);
+.Coupons .couponsShowCase .filterArea {
+    height: 125px;
+    width: 80%;
+    display: flex;
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,0) 20%, rgba(0,0,0,1) 62%);
 }
-.Coupons .couponsShowCase .sortBy >h1{
-    color: var(--color-gold-brown);
 
+.Coupons .couponsShowCase .filterArea .instructionsHolder>* {
+    height: 30px;
+    padding-top: 5px;
+    
+    
 }
+
+.Coupons .couponsShowCase .filterArea .instructionsHolder {
+    color: azure;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    align-items: end;
+    font-size: 1.1rem;
+    gap: 10px;
+}
+
+.Coupons .couponsShowCase .filterArea .selectorHolder {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    height: 100%;
+}
+
+.Coupons .couponsShowCase .filterArea .selectorHolder>* {
+    height: 30px;
+    width: 80%;
+    /* height: 25px; */
+    border: none;
+}
+
+
+
+
+.Coupons .couponsShowCase .headerHolder {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 130px;
+    position: sticky;
+    top: 10.5%;
+    left: 0;
+    z-index: 2;
+    
+}
+
+.Coupons .couponsShowCase .couponsHolder {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    gap: 30px;
+}
+
+  .purchase {
+    width: 160px;
+    height : 120px;
+    margin-left: 10%;
+    /* padding-right: 2%; */
+    background-color: black;
+    color: azure;
+    word-wrap: break-word;
+    font-size: 1.2rem;
+    /* transform: translate(150px,100px); */
+    border: 5px double rgb(215, 170, 21);
+    border-radius: 80% 0  80% 0;
+    
+
+  } 

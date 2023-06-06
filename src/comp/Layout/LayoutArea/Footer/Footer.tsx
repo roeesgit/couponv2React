@@ -38,13 +38,15 @@ export default function Footer(): JSX.Element {
     const [refresh, setrefresh] = useState(false)
 
     const handleRefresh = () => {
-        index.current = index.current ===17? 0 : ++index.current
+        index.current = index.current === 17 ? 0 : ++index.current
         setrefresh(!refresh)
 
     }
+    const handleNotFound = ()=>{
+        navi("/page-not-found")
+      }
 
-
-    const handleHelp=()=>{
+    const handleHelp = () => {
         navi("/help")
     }
     return (
@@ -54,23 +56,24 @@ export default function Footer(): JSX.Element {
                 <p>{footerQuotes[index.current][0]}</p>
                 <span>{footerQuotes[index.current][1]}</span>
             </div>
-            <div className="buttonArea">
-                   <MdNextPlan onClick={handleRefresh}/>
+            
+            <div className="refreshArea">
+                <MdNextPlan onClick={handleRefresh} className='icon'/>
             </div>
-                <div className="spacHolder">
-                <BiSupport className='icon'/>
-                <IoLogoWhatsapp className='icon'/>
-                <MdOutlineHelp className='icon' onClick={handleHelp}/>
-                </div>
 
+            <div className="supportArea">
+                <BiSupport className='icon' onClick={handleNotFound}/>
+                <IoLogoWhatsapp className='icon' onClick={handleNotFound}/>
+                <MdOutlineHelp className='icon' onClick={handleHelp} />
+            </div>
 
             <div className="socialMediaArea">
 
-                <FaFacebookF className='icon'/>
-                <ImTwitter className='icon'/>
-                <FiGithub className='icon'/>
-                <GrLinkedinOption className='icon'/>
-                <AiFillInstagram className='icon'/>
+                <FaFacebookF className='icon' onClick={handleNotFound}/>
+                <ImTwitter className='icon'onClick={handleNotFound} />
+                <FiGithub className='icon' onClick={handleNotFound}/>
+                <GrLinkedinOption className='icon' onClick={handleNotFound}/>
+                <AiFillInstagram className='icon' onClick={handleNotFound}/>
             </div>
 
         </div>

@@ -65,12 +65,12 @@ export default function AdminView(): JSX.Element {
 
         {!isEmpty.current &&
           <>
-          {
+            {
 
-            isCompany.current ?
-              <Companies />
-              :
-              <Customers />}
+              isCompany.current ?
+                <Companies />
+                :
+                <Customers />}
           </>
         }
 

@@ -34,8 +34,8 @@ export default function CouponManipulate(): JSX.Element {
 
 
 
-    const setEndDate = (startDate: Date) : boolean => {
-        endtDateStartLimit.current.setDate(startDate.getDate()+1);
+    const setEndDate = (startDate: Date): boolean => {
+        endtDateStartLimit.current.setDate(startDate.getDate() + 1);
         endtDateStartLimitValue.current = endtDateStartLimit.current.toISOString().split('T')[0];
         endtDateendLimit.current.setDate(endtDateStartLimit.current.setFullYear(today.getFullYear() + 2))
         endtDateEndLimitValue.current = endtDateendLimit.current.toISOString().split('T')[0];
@@ -61,30 +61,30 @@ export default function CouponManipulate(): JSX.Element {
             .required("Start-date name is required")
             .min(startDateStartLimit, 'Start date must be after today')
             .max(startDateEndLimit, "Start date must be within one year")
-            // .test("sss", function (value) {
-            //    return setEndDate(value);
-            // })
+        // .test("sss", function (value) {
+        //    return setEndDate(value);
+        // })
         , endDate: yup.date()
             .required("End-date name is required")
             .min(yup.ref('startDate'), 'End date must be after the start date')
             .test("is-after-start-date", "End date must be after the start date", function (value) {
                 const startDate = this.resolve(yup.ref("startDate"));
                 if (!startDate || !value) {
-                  return true; // Skip validation if either start date or end date is not set
+                    return true; // Skip validation if either start date or end date is not set
                 }
                 return new Date(value) > startDate;
-              })
-            // .min(endtDateStartLimit.current, 'Start date must be after today')
-            // .max(endtDateEndLimitValue.current, "Start date must be within one year")
+            })
+        // .min(endtDateStartLimit.current, 'Start date must be after today')
+        // .max(endtDateEndLimitValue.current, "Start date must be within one year")
 
         , amount: yup.number()
             .required("Amount is required")
-            .min(100, "This field must be heigher then 100")
+            .min(50, "This field must be higher than 50")
             .max(1000, "This field must be lower than 1000")
         , price: yup.number()
             .required("Price is required")
-            .min(100, "This field must be heigher then 100")
-            .max(2000, "This field must be lower than 2000")
+            .min(5, "This field must be higher than 5")
+            .max(300, "This field must be lower than 300")
         , image: yup.string()
             .required("Image is required")
             .matches(
@@ -116,10 +116,10 @@ export default function CouponManipulate(): JSX.Element {
 
     const addcoupon = async (coupon: couponModel) => {
         setIsLoading(true);
-        console.log("12  12  ",coupon);
+        console.log("12  12  ", coupon);
         coupon.endDate = new Date(coupon.endDate);
         console.log(coupon.endDate);
-        
+
         coupon.startDate = new Date(coupon.startDate)
         console.log(coupon.startDate);
         await couponServiceObj
@@ -141,15 +141,15 @@ export default function CouponManipulate(): JSX.Element {
 
         setIsLoading(true);
         couponServiceObj.updatecoupon(coupon, couponId)
-        .then(() => {
-            toast.success("Update Sucsseful")
-            setIsLoading(false);
-            navi("/company");
-        }).catch(e => {
-            setIsLoading(false);
-            let errorMessage: ErrorMessage = e.response.data;
-            toast.error(errorMessage.message);
-        })
+            .then(() => {
+                toast.success("Update Sucsseful")
+                setIsLoading(false);
+                navi("/company");
+            }).catch(e => {
+                setIsLoading(false);
+                let errorMessage: ErrorMessage = e.response.data;
+                toast.error(errorMessage.message);
+            })
     };
 
     function resetForm() {
@@ -171,8 +171,8 @@ export default function CouponManipulate(): JSX.Element {
     }
 
 
-    
-    console.log("endtDateStartLimitValue ",endtDateStartLimitValue.current);
+
+    console.log("endtDateStartLimitValue ", endtDateStartLimitValue.current);
 
     return (
         <div className="CouponManipulate">
@@ -189,11 +189,11 @@ export default function CouponManipulate(): JSX.Element {
 
                                 <label htmlFor="title" >Title</label>
                                 <input autoFocus type="text" placeholder="Title" {...register("title")} />
-                                <span className={errors.title? "inputError" :"" }>{errors.title?.message}</span>
+                                <span className={errors.title ? "inputError" : ""}>{errors.title?.message}</span>
 
                                 <label htmlFor="description"  >Description</label>
                                 <textarea placeholder="Description" className='description' {...register("description")} />
-                                <span className={errors.description? "inputError" :"" }>{errors.description?.message}</span>
+                                <span className={errors.description ? "inputError" : ""}>{errors.description?.message}</span>
 
                                 <label htmlFor="category" >Category</label>
                                 <select id="dropdown" {...register('category')} defaultValue="">
@@ -202,40 +202,40 @@ export default function CouponManipulate(): JSX.Element {
                                         (<option key={c.id} value={c.name}>{c.name}</option>)
                                     )}
                                 </select>
-                                <span className={errors.category? "inputError" :"" }>{errors.category?.message}</span>
+                                <span className={errors.category ? "inputError" : ""}>{errors.category?.message}</span>
 
                                 <label htmlFor="image" >Image</label>
                                 <input type="url" placeholder="Image" {...register("image")} />
-                                <span className={errors.image? "inputError" :"" }>{errors.image?.message}</span>
+                                <span className={errors.image ? "inputError" : ""}>{errors.image?.message}</span>
                             </div>
                             <div className="innerField">
                                 <label htmlFor="startDate" >Start-Date</label>
                                 <input type="date" placeholder="start Date" min={startDateStartLimitValue} max={startDateEndLimitValue} {...register("startDate")} />
-                                <span className={errors.startDate? "inputError" :"" }>{errors.startDate?.message}</span>
+                                <span className={errors.startDate ? "inputError" : ""}>{errors.startDate?.message}</span>
 
                                 <label htmlFor="endDate" >End-Date</label>
                                 <input disabled={!watch("startDate")} type="date" placeholder="end Date" {...register("endDate")} />
-                                <pre className={errors.endDate? "inputError" :"" }> {errors.endDate?.message}</pre>
+                                <pre className={errors.endDate ? "inputError" : ""}> {errors.endDate?.message}</pre>
 
                                 <label htmlFor="amount" >Amount</label>
-                                <input type="number" step={25} placeholder="Amount" {...register("amount")}/>
-                                <span className={errors.amount? "inputError" :"" }>{errors.amount?.message}</span>
+                                <input type="number" step={1} min={50} placeholder="Amount" {...register("amount")} />
+                                <span className={errors.amount ? "inputError" : ""}>{errors.amount?.message}</span>
 
                                 <label htmlFor="price" >Price</label>
-                                <input type="number" step={10} placeholder="Price" {...register("price")} />
-                                <span className={errors.price? "inputError" :"" }>{errors.price?.message}</span>
+                                <input type="number" step={5} placeholder="Price" {...register("price")} />
+                                <span className={errors.price ? "inputError" : ""}>{errors.price?.message}</span>
 
 
 
                             </div>
                         </div>
                         <div className="button">
-                            <button disabled={Object.keys(errors).length != 0} type="submit">{couponId ? "Save" : "Add"} Coupon</button>
+                            <button onClick={exit}>Exit</button>
                             <button onClick={resetForm}>Reset Form</button>
+                            <button disabled={Object.keys(errors).length != 0} type="submit">{couponId ? "Save" : "Add"} Coupon</button>
                         </div>
                     </form>
 
-                    <button onClick={exit}>Exit</button>
                 </>
             )}
 

@@ -60,12 +60,7 @@ class CompanyService {
     return companyStore.getState().companyList;
   }
     
-  
-  
-  // getCompanyFromState(companyId: number): companyModel {
-  //   const indexToFind = companyStore.getState().companyList.findIndex(c => c.id === companyId)
-  //   return companyStore.getState().companyList[indexToFind];
-  // }
+ 
   async getCompanyById(companyId: number): Promise<companyModel> {
     let company : companyModel;
     if (companyStore.getState().companyList.length === 0) {
@@ -83,13 +78,6 @@ else{
       return company;
     }
     
-  // async getCompanyByEmail(email: string): Promise<companyModel> {
-    
-    //   const res = await axios.get<companyModel>(appConfig.companies + "/company_name/" + email,
-    //     { headers: { "Authorization": "Bearer " + authStore.getState().token } }
-    //   )
-    //   return res.data;
-    // }
   }
   
   const companyServiceObj = new CompanyService();

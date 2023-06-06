@@ -1,16 +1,45 @@
 .PageNotFound {
+    
+}
+.PageNotFound .supportMessage {
+    position: absolute;
+    top:30%;
+    right: 15%;
     display: flex;
+    flex-direction: column;
+
+}
+
+.PageNotFound .supportMessage .logo{
+
+    height: 60px;
+    width: 300px;
+    
+}
+.PageNotFound .supportMessage .gpt{
+    height: 300px;
+    width: 300px;
+}
+.PageNotFound  img{
+    height: 450px;
+    width: 600px;
+}
+
+.PageNotFound .buttonsArea{
+    position: absolute;
+    top:71%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 240px;
+    height: 120px;
+    /* background-color: rgba(0, 255, 255, 0.858); */
+    display: flex;
+    flex-direction: column;
+}
+.PageNotFound .buttonsArea >* {
+    /* border: groove 3px orange; */
     height: 100%;
-    align-items: center ;
-    justify-content: center;
-
-}
-
-.PageNotFound .imgContianer{
-    box-shadow: -43px 59px 33px  rgba(0, 0, 0, 0.641) ;
-    border-radius: 12%;
-}
-.PageNotFound .imgContianer img{
-    border-radius: 12%;
+    border: none;
+    background-color: transparent;
 
 }

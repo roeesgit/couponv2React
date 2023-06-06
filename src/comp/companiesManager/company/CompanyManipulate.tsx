@@ -57,12 +57,12 @@ export default function CompanyManipulate(): JSX.Element {
   });
 
   const passwordErrorMessage =
-    <div>
-      <p> Password must contain at least one digit</p>
-      <p> one lowercase letter, one uppercase letter</p>
-      <p> one special character, must not contain spaces</p>
-      <p> and must be at least 8 characters long</p>
-    </div>;
+  <div>
+      <p> Password must contain at least one digit
+      one lowercase letter, one uppercase letter
+      one special character, must not contain spaces
+      and must be at least 8 characters long.</p>
+  </div>;
 
 
   const {

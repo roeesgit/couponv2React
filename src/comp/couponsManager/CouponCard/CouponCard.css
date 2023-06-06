@@ -1,11 +1,17 @@
 .CouponCard {
+  
   height: 270px;
   width: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; 
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: rgba(36, 36, 36, 0.973);
+    /* box-shadow: inset -1px 1px 19px #000000, inset 1px -1px 32px #000000,
+      5px 5px 12px rgba(0, 0, 0, 0.517); */
+   
 }
 .CouponCard .card-text {
+  border: groove 1px orange;
   white-space: wrap;
   height: 100%;
 }
@@ -15,6 +21,7 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  border: groove 1px rgb(136, 255, 0);
 }
 
 .CouponCard .card-title > h2 {
@@ -27,6 +34,7 @@
 .CouponCard .price-contiener {
   display: flex;
   width: 100%;
+  border: groove 1px orange;
 }
 .CouponCard .price-wrapper {
   background-color: rgba(240, 248, 255, 0.416);
@@ -34,10 +42,11 @@
   border-radius: 50%;
   width: 90%;
   /* height: 40%; */
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
+  border: groove 1px orange;
 }
 .CouponCard .card-price {
 /* height: 100%;  */
@@ -45,7 +54,6 @@
 .CouponCard .card-price > span {
   font-size: 1.3rem; 
   font-weight: 600;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   color: #000000;
   text-shadow: 0 0 7px rgb(254, 255, 254);
 }
@@ -62,10 +70,27 @@
 
 
 
+.CouponCard .couponDetail{
+position: relative;
+color: aliceblue;
+
+
+}
 
 .CouponCard .couponDetail>button{
 background-color: transparent;
   height: fit-content;
 border: none;
+
+}
+
+
+.discount{
+position: absolute;
+top : -10px;
+right: -20px;
+scale: 3;
+color: aliceblue;
+
 
 }

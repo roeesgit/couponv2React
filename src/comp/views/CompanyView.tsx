@@ -8,6 +8,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 export default function CompanyView(): JSX.Element {
 
 
+ 
 
   return (
     <div className="CompanyView">
@@ -18,7 +19,7 @@ export default function CompanyView(): JSX.Element {
               <div className="box">
                 <div className="box">
                   <div className="box">
-                    <div className="last-box box">My coupons</div>
+                    <div className="last-box box">My Coupons</div>
                   </div>
                 </div>
               </div>
@@ -29,11 +30,6 @@ export default function CompanyView(): JSX.Element {
 
 
       <div className="showCase">
-        <div className="navLinkHolder ">
-          <NavLink to="/company/coupon">
-            <p className="addCompanybutton">Add Coupon</p>
-          </NavLink>
-        </div>
 
         <CompanyCoupons />
 

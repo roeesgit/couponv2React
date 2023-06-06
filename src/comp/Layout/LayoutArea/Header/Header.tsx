@@ -18,6 +18,9 @@ export default function Header(): JSX.Element {
     return () => unsubscribe();
   }, []);
 
+
+
+
   const initUserName = () => {
     userName.current[1] = authStore.getState().user ? authStore.getState().user!.loggedUserName : "Guest";
     const role: string | undefined =

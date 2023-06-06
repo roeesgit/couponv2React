@@ -47,6 +47,8 @@ export default function Routing(): JSX.Element {
 
 
   const naviByRole = () => {
+    console.log("naviiiiiiiiiii");
+    
     if (isConnected) {
 
       const role: string | undefined =
@@ -93,6 +95,7 @@ export default function Routing(): JSX.Element {
           <Routes>
             <Route path="home" element={<Home />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route path="/page-not-found" element={<PageNotFound />} />
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="login" element={<Login />} />
             <Route path="logout" element={<Logout />} />

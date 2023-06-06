@@ -14,7 +14,7 @@ import { ErrorMessage } from "../../../models/ErrorMessageModel";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../Loader/Loader";
-
+import logo from '../../../Assets/images/logo-img.png'
 export function Login(): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const navi = useNavigate();
@@ -35,12 +35,12 @@ export function Login(): JSX.Element {
       resolver: yupResolver(schema),
     });
 
-  const passwordErrorMessage =
-    <div className="passwordErrorMessage">
-      <p> Password must contain at least one digit</p>
-      <p> one lowercase letter, one uppercase letter</p>
-      <p> one special character, must not contain spaces</p>
-      <p> and must be at least 8 characters long</p>
+    const passwordErrorMessage =
+    <div>
+        <p> Password must contain at least one digit
+        one lowercase letter, one uppercase letter
+        one special character, must not contain spaces
+        and must be at least 8 characters long.</p>
     </div>;
 
 
@@ -81,8 +81,10 @@ export function Login(): JSX.Element {
         <Loader />
         :
         <>
+        
           <form className="form" onSubmit={handleSubmit(login)}>
-            <p id="heading">Login</p>
+                 <img className="logo" src={logo} alt="logo" />
+            <label htmlFor="field">User name:</label>
             <div className="field">
               <MdAlternateEmail />
               <input
@@ -98,6 +100,7 @@ export function Login(): JSX.Element {
                 {errors.username?.message}
               </span>
             )}
+              <label htmlFor="field">Password:</label>
             <div className="field">
               <AiFillUnlock />
               <input

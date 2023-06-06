@@ -8,7 +8,7 @@ import { ErrorMessage } from "../../../models/ErrorMessageModel";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../Loader/Loader";
-
+import { FcInfo } from 'react-icons/fc'
 
 export default function Customers(): JSX.Element {
   const [customers, setCustomers] = useState<customerModel[]>([]);
@@ -90,7 +90,9 @@ export default function Customers(): JSX.Element {
     e.target.value == "" && setCustomers(customerStore.getState().customerList);
   }
 
-
+  const handleAddCustomer = () => {
+    navi('/admin/customer/customerDetails')
+  }
   return (
     <div className="Customers listContianer">
       {isLoading ?
@@ -98,61 +100,68 @@ export default function Customers(): JSX.Element {
         :
 
         <div className="listArea">
-          <div className="navLinkHolder">
-            <NavLink to="/admin/customer/customerDetails" >
-              <p className="addCustomerbutton">Add Customer</p>
-            </NavLink>
-          </div>
-          <div id="top" className="filers">
+          <div className="filers">
+            <h3>Start entering text to filter the list: </h3>
             <input
               type="text"
-              placeholder="filter by name"
               onChange={filterByName}
             />
           </div>
           {customers.length > 0 ?
-        
-              <div className="customersContianer listHolder">
-                <ol className="customerOl">
-                  <div className="oLdetailsHeaders">
-                    <div className="oLdetailsHeadersPrincipal">
-                      <li>NAME</li>
-                      <li>EMAIL</li>
+
+            <div className="customersContianer listHolder">
+              <ol className="customerOl">
+                <div className="oLdetailsHeaders">
+                  <div className="oLdetailsHeadersPrincipal">
+
+                    <div className="page-help">
+
+                      <FcInfo className="info-icon" />
+                      <p>
+                        Click a customers name to update or delete a customers info.
+                      </p>
                     </div>
-                    <div className="oLdetailsAction">
-                      <li> DELETE </li>
+
+                    <div className="princpals">
+
+                      <li>Name</li>
+                      <li>Email</li>
                     </div>
                   </div>
-                  {customers.map((customer) => (
-                    <ul key={customer.id}>
-                      <li>
-                        <button onClick={() => handlecustomerDetails(customer)} className="userCardbutton">
+                  <div className="oLdetailsAction">
+                    <button className="addCustomer" onClick={handleAddCustomer}>Add Customer</button>
+                  </div>
+                </div>
+                {customers.map((customer) => (
+                  <ul key={customer.id}>
+                    <li>
+                      <button onClick={() => handlecustomerDetails(customer)} className="userCardbutton">
 
-                          <div className="oLdetails">
-                            <div className="oLdetailsfullName">{customer.firstName + " " + customer.lastName}</div>
-                            <div className="oLdetailsemail"> {customer.email}</div>
-                          </div>
-                        </button>
-                        <div className="oLdetailsbtns">
-                          <button className="delete" onClick={() => handleDelete(customer)}>
-                            Delete
-                          </button>
+                        <div className="oLdetails">
+                          <div className="oLdetailsfullName">{customer.firstName + " " + customer.lastName}</div>
+                          <div className="oLdetailsemail"> {customer.email}</div>
                         </div>
-                      </li>
-                    </ul>
-                  ))}
+                      </button>
+                      <div className="oLdetailsbtns">
+                        <button className="delete" onClick={() => handleDelete(customer)}>
+                          Delete
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                ))}
 
-                </ol>
-              </div>
-
-              :
-              <div className="emptyList">
-                <h1>No customers... </h1>
-              </div>
-              }
+              </ol>
             </div>
 
-}
+            :
+            <div className="emptyList">
+              <h1>No customers... </h1>
+            </div>
+          }
         </div>
+
+      }
+    </div>
   );
 }

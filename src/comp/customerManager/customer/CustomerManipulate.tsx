@@ -50,7 +50,7 @@ export default function CustomerManipulate(): JSX.Element {
             .required("Password is required")
             .max(20, "This field must be less than 20 characters long")
             .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?!.*\s).{8,}$/,
-                "Password must contain at least one digit,\none lowercase letter, one uppercase letter, one special character, must not contain spaces, and must be at least 8 characters long")
+                "Password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, must not contain spaces, and must be at least 8 characters long")
         , confirmPassword: yup.string()
             .required("confirmation of password is important")
             .oneOf([yup.ref("password"), ""], "password doesn't match"),
@@ -59,10 +59,10 @@ export default function CustomerManipulate(): JSX.Element {
 
     const passwordErrorMessage =
         <div>
-            <p> Password must contain at least one digit</p>
-            <p> one lowercase letter, one uppercase letter</p>
-            <p> one special character, must not contain spaces</p>
-            <p> and must be at least 8 characters long</p>
+            <p> Password must contain at least one digit
+            one lowercase letter, one uppercase letter
+            one special character, must not contain spaces
+            and must be at least 8 characters long.</p>
         </div>;
 
 
@@ -90,7 +90,7 @@ export default function CustomerManipulate(): JSX.Element {
         customerServiceObj
             .addCustomer(customer)
             .then(() => {
-                toast.success(customer.firstName +" is now a new Customer")
+                toast.success(customer.firstName + " is now a new Customer")
                 setIsLoading(false);
                 navi("/admin/2");
             })
@@ -99,12 +99,12 @@ export default function CustomerManipulate(): JSX.Element {
                 let errorMessage: ErrorMessage = e.response.data;
                 toast.error("add customer " + errorMessage.message);
             });
-        };
-        
-        const updateCustomer = async (customer: regCustomerModel) => {
-            setIsLoading(true);
-            customerServiceObj.updateCustomer(customer, customerId).then(() => {
-            toast.success("Customer with ID: "+customerId+" Updated")
+    };
+
+    const updateCustomer = async (customer: regCustomerModel) => {
+        setIsLoading(true);
+        customerServiceObj.updateCustomer(customer, customerId).then(() => {
+            toast.success("Customer with ID: " + customerId + " Updated")
             setIsLoading(false);
             navi("/admin/customer/" + customerId);
         }).catch(e => {
@@ -136,13 +136,29 @@ export default function CustomerManipulate(): JSX.Element {
                 <Loader />
             ) : (
                 <div className="CustomerManipulate">
+                    <div className="CustomerView">
+                        <div className="contianer">
+                            <div className="box1">
+                                <button className="tugleOption">
+                                    <div className="box">
+                                        <div className="box">
+                                            <div className="box">
+                                                <div className="box">
+                                                    <div className="last-box box">{customerId ? "Update " : "Add "} Customer</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div className="header">
-                    <h1>{customerId ? "Update " : "Add "} Customer</h1>
                     </div>
                     <form className="customerForm" onSubmit={handleSubmit(sendCustomer)}>
                         <div className="fields">
 
-                            <label htmlFor="firstName" className="customerManipulate">First mame</label>
+                            <label htmlFor="firstName" className="customerManipulate">First name</label>
                             <input type="text" placeholder="First name" {...register("firstName")} />
                             <span className="inputError">{errors.firstName?.message}</span>
 
@@ -150,7 +166,7 @@ export default function CustomerManipulate(): JSX.Element {
                             <input type="text" placeholder="Last name" {...register("lastName")} />
                             <span className="inputError">{errors.lastName?.message}</span>
 
-                            <label htmlFor="email" className="customerManipulate">@ Email</label>
+                            <label htmlFor="email" className="customerManipulate">Email</label>
                             <input type="text" placeholder="Email" {...register("email")} />
                             <span className="inputError">{errors.email?.message}</span>
 
@@ -164,9 +180,9 @@ export default function CustomerManipulate(): JSX.Element {
 
                         </div>
                         <div className="button">
-                            <button disabled={Object.keys(errors).length != 0} type="submit">{customerId ? "Save" : "Add"} customer</button>
                             <button onClick={resetForm}>Reset Form</button>
-                            <button onClick={exit}>exit</button>
+                            <button onClick={exit}>Close</button>
+                            <button disabled={Object.keys(errors).length != 0} type="submit">Finish</button>
 
                         </div>
                     </form>

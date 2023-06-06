@@ -21,7 +21,10 @@ root.render(
     borderRadius: '100%',
     background: 'var(--color-gold-neon)',
     boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.54)',
-    color: 'blue'
+    transform: 'translate(-5px, -85px)',
+    scale:'0.7'
+
+
   }}/>
   </BrowserRouter>
    </>

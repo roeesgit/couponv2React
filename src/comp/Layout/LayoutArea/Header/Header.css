@@ -11,6 +11,7 @@
 
 .Header * {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
 }
 
 .Header .headerContainer {
@@ -44,28 +45,33 @@
 }
 
 .Header .headerContainer .spaceHolder {
-  width: 40%;
-  
+  width: 10%;
 }
+
 .Header .headerContainer .homePage {
-  height: 100%;
+  height: 80%;
   width: 10%;
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: end;
+  padding-right: 5px;
+  /* border: groove 3px rgb(0, 255, 34); */
 }
-.Header .headerContainer .homePage .goHome , .profile{
-  height: 60%;
-  height: calc(var(--font1-sizeVW));
-  width: 40%;
+
+.Header .headerContainer .homePage .goHome,
+.profile {
+  height: calc(var(--container-height)/2);
+ 
+  width: calc(var(--container-width));
   cursor: pointer;
   color: #fcfcfc;
 }
 
 .Header .greeting {
-  width: 30%;
+  width: 90%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .Header .greeting .greetingBox {
@@ -73,16 +79,17 @@
   text-shadow: 0rem 0rem calc(var(--font1-sizeVW) /4) #b99e27;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: calc(var(--font1-sizeVW) / 1.4);
+  /* justify-content: space-between; */
+  font-size: calc(var(--font1-sizeVW) / 1.2);
 }
 
 .Header .greeting .hello {
   height: 100%;
-  width: 70%;
+  width: 83%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: end;
+  
 }
 
 .Header .greeting .staticHolder {
@@ -93,31 +100,32 @@
 
 .Header .greeting .staticHolder .static-left-border {
   height: 70%;
-  border-left: solid calc(var(--font1-sizeVW) / 50) var(--logo-shadow-x);
   border-radius: calc(var(--font1-sizeVW) / 1.4);
-  box-shadow: 0 0 calc(var(--font1-sizeVW) / 4) calc(var(--font1-sizeVW) / 14) rgba(255, 255, 255, 0.589),
-    1px 1px 20px 1px rgb(159, 134, 134);
+  box-shadow: 0 0 calc(var(--font1-sizeVW) / 4) calc(var(--font1-sizeVW)/30) rgba(159, 157, 157, 0.271),
+  1px 1px 20px 1px rgb(159, 134, 134);
 }
 
-.Header .greeting .greetingBox .login , .logout{
-  height: 100%;
-  width: 25%;
+.Header .greeting .greetingBox .login,
+.logout {
+  height: 90%;
+  width: 13%;
   border: none;
   background: transparent;
   display: flex;
-  align-items: end;
+  align-items: center;
+  justify-content: end;
   color: var(--logo-shadow-black);
-  font-size: calc(var(--font1-sizeVW) / 1.2);
+  font-size: calc(var(--font1-sizeVW) / 1.4);
   text-shadow: 0rem 0rem calc(var(--font1-sizeVW) / 4) #f9f9f9cf;
   cursor: pointer;
 }
 
-.Header .profileMenu{
+.Header .profileMenu {
   position: absolute;
   bottom: -204px;
   right: 20px;
   width: 150px;
-color: #7c8bf1cf;  
+  color: #7c8bf1cf;
   height: 200px;
   border-radius: 10px;
   background-color: white;
@@ -126,14 +134,16 @@ color: #7c8bf1cf;
 }
 
 @keyframes grow {
-  0%{
+  0% {
     scale: 0;
-    transform: translate(10px,10px);
+    transform: translate(10px, 10px);
   }
-  50%{
+
+  50% {
     scale: 0.5;
   }
-  100%{
+
+  100% {
     scale: 1;
   }
 }
